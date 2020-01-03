@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+<div class="header">
+  <img src="../../../assets/psiog_logo.png" id="logo" alt="logo">
+  <div *ngIf="showHeader; else elseBlock" class="navbar-icons">
+  <mat-icon>home</mat-icon>
+  <mat-icon>notifications</mat-icon>
+  <mat-icon>help</mat-icon>
+  <mat-icon>person</mat-icon>
+  </div>
+  <ng-template #elseBlock><img src="../../../assets/psiog_logo.png" id="logo2" alt="logo"></ng-template>
+</div>
+</mat-toolbar>

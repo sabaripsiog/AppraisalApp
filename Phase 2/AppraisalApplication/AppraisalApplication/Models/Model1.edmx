@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AppraisalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Appraisal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="EmployeeID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppraisalGoals">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ManagerComments" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EmployeeComments" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ManagerRating" Type="int" Nullable="false" />
+          <Property Name="EmployeeRating" Type="int" Nullable="false" />
+          <Property Name="AppraisalID" Type="int" Nullable="false" />
+          <Property Name="GoalsID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppraisalPolicy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimePeriod" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="DOJ" Type="date" Nullable="false" />
+          <Property Name="Designation" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BloodType" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ManagerID" Type="varchar" MaxLength="50" />
+          <Property Name="IsAppraiser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsHR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AppraisalPolicyID" Type="int" Nullable="false" />
+          <Property Name="AppraisalStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GoalCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Goals">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="GoalDescription" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="GoalCategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmployeeID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="Appraisal_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Appraisal" Type="Self.Appraisal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Appraisal">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppraisalDetails_Appraisal">
+          <End Role="Appraisal" Type="Self.Appraisal" Multiplicity="1" />
+          <End Role="AppraisalGoals" Type="Self.AppraisalGoals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appraisal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppraisalGoals">
+              <PropertyRef Name="AppraisalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppraisalDetails_Goals">
+          <End Role="Goals" Type="Self.Goals" Multiplicity="1" />
+          <End Role="AppraisalGoals" Type="Self.AppraisalGoals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goals">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppraisalGoals">
+              <PropertyRef Name="GoalsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Employee_AppraisalPolicy">
+          <End Role="AppraisalPolicy" Type="Self.AppraisalPolicy" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppraisalPolicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="AppraisalPolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Goals_GoalCategory">
+          <End Role="GoalCategory" Type="Self.GoalCategory" Multiplicity="1" />
+          <End Role="Goals" Type="Self.Goals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoalCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Goals">
+              <PropertyRef Name="GoalCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserDetails_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserDetails">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AppraisalModelStoreContainer">
+          <EntitySet Name="Appraisal" EntityType="Self.Appraisal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppraisalGoals" EntityType="Self.AppraisalGoals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppraisalPolicy" EntityType="Self.AppraisalPolicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoalCategory" EntityType="Self.GoalCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Goals" EntityType="Self.Goals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Appraisal_Employee" Association="Self.Appraisal_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Appraisal" EntitySet="Appraisal" />
+          </AssociationSet>
+          <AssociationSet Name="AppraisalDetails_Appraisal" Association="Self.AppraisalDetails_Appraisal">
+            <End Role="Appraisal" EntitySet="Appraisal" />
+            <End Role="AppraisalGoals" EntitySet="AppraisalGoals" />
+          </AssociationSet>
+          <AssociationSet Name="AppraisalDetails_Goals" Association="Self.AppraisalDetails_Goals">
+            <End Role="Goals" EntitySet="Goals" />
+            <End Role="AppraisalGoals" EntitySet="AppraisalGoals" />
+          </AssociationSet>
+          <AssociationSet Name="Employee_AppraisalPolicy" Association="Self.Employee_AppraisalPolicy">
+            <End Role="AppraisalPolicy" EntitySet="AppraisalPolicy" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="Goals_GoalCategory" Association="Self.Goals_GoalCategory">
+            <End Role="GoalCategory" EntitySet="GoalCategory" />
+            <End Role="Goals" EntitySet="Goals" />
+          </AssociationSet>
+          <AssociationSet Name="UserDetails_Employee" Association="Self.UserDetails_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="UserDetails" EntitySet="UserDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AppraisalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Appraisal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.Appraisal_Employee" FromRole="Appraisal" ToRole="Employee" />
+          <NavigationProperty Name="AppraisalGoals" Relationship="Self.AppraisalDetails_Appraisal" FromRole="Appraisal" ToRole="AppraisalGoals" />
+        </EntityType>
+        <EntityType Name="AppraisalGoal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ManagerComments" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeComments" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ManagerRating" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeRating" Type="Int32" Nullable="false" />
+          <Property Name="AppraisalID" Type="Int32" Nullable="false" />
+          <Property Name="GoalsID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Appraisal" Relationship="Self.AppraisalDetails_Appraisal" FromRole="AppraisalGoals" ToRole="Appraisal" />
+          <NavigationProperty Name="Goal" Relationship="Self.AppraisalDetails_Goals" FromRole="AppraisalGoals" ToRole="Goals" />
+        </EntityType>
+        <EntityType Name="AppraisalPolicy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TimePeriod" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.Employee_AppraisalPolicy" FromRole="AppraisalPolicy" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DOJ" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Designation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BloodType" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ManagerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAppraiser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsHR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AppraisalPolicyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Appraisals" Relationship="Self.Appraisal_Employee" FromRole="Employee" ToRole="Appraisal" />
+          <NavigationProperty Name="AppraisalPolicy" Relationship="Self.Employee_AppraisalPolicy" FromRole="Employee" ToRole="AppraisalPolicy" />
+          <NavigationProperty Name="UserDetails" Relationship="Self.UserDetails_Employee" FromRole="Employee" ToRole="UserDetails" />
+          <Property Name="AppraisalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GoalCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Goals" Relationship="Self.Goals_GoalCategory" FromRole="GoalCategory" ToRole="Goals" />
+        </EntityType>
+        <EntityType Name="Goal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="GoalDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GoalCategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AppraisalGoals" Relationship="Self.AppraisalDetails_Goals" FromRole="Goals" ToRole="AppraisalGoals" />
+          <NavigationProperty Name="GoalCategory" Relationship="Self.Goals_GoalCategory" FromRole="Goals" ToRole="GoalCategory" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.UserDetails_Employee" FromRole="UserDetails" ToRole="Employee" />
+        </EntityType>
+        <Association Name="Appraisal_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Appraisal" Type="Self.Appraisal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Appraisal">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppraisalDetails_Appraisal">
+          <End Role="Appraisal" Type="Self.Appraisal" Multiplicity="1" />
+          <End Role="AppraisalGoals" Type="Self.AppraisalGoal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appraisal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppraisalGoals">
+              <PropertyRef Name="AppraisalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppraisalDetails_Goals">
+          <End Role="Goals" Type="Self.Goal" Multiplicity="1" />
+          <End Role="AppraisalGoals" Type="Self.AppraisalGoal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goals">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppraisalGoals">
+              <PropertyRef Name="GoalsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Employee_AppraisalPolicy">
+          <End Role="AppraisalPolicy" Type="Self.AppraisalPolicy" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppraisalPolicy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="AppraisalPolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserDetails_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserDetails">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Goals_GoalCategory">
+          <End Role="GoalCategory" Type="Self.GoalCategory" Multiplicity="1" />
+          <End Role="Goals" Type="Self.Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoalCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Goals">
+              <PropertyRef Name="GoalCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AppraisalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appraisals" EntityType="Self.Appraisal" />
+          <EntitySet Name="AppraisalGoals" EntityType="Self.AppraisalGoal" />
+          <EntitySet Name="AppraisalPolicies" EntityType="Self.AppraisalPolicy" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="GoalCategories" EntityType="Self.GoalCategory" />
+          <EntitySet Name="Goals" EntityType="Self.Goal" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <AssociationSet Name="Appraisal_Employee" Association="Self.Appraisal_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Appraisal" EntitySet="Appraisals" />
+          </AssociationSet>
+          <AssociationSet Name="AppraisalDetails_Appraisal" Association="Self.AppraisalDetails_Appraisal">
+            <End Role="Appraisal" EntitySet="Appraisals" />
+            <End Role="AppraisalGoals" EntitySet="AppraisalGoals" />
+          </AssociationSet>
+          <AssociationSet Name="AppraisalDetails_Goals" Association="Self.AppraisalDetails_Goals">
+            <End Role="Goals" EntitySet="Goals" />
+            <End Role="AppraisalGoals" EntitySet="AppraisalGoals" />
+          </AssociationSet>
+          <AssociationSet Name="Employee_AppraisalPolicy" Association="Self.Employee_AppraisalPolicy">
+            <End Role="AppraisalPolicy" EntitySet="AppraisalPolicies" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="UserDetails_Employee" Association="Self.UserDetails_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="UserDetails" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="Goals_GoalCategory" Association="Self.Goals_GoalCategory">
+            <End Role="GoalCategory" EntitySet="GoalCategories" />
+            <End Role="Goals" EntitySet="Goals" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AppraisalModelStoreContainer" CdmEntityContainer="AppraisalEntities">
+          <EntitySetMapping Name="Appraisals">
+            <EntityTypeMapping TypeName="AppraisalModel.Appraisal">
+              <MappingFragment StoreEntitySet="Appraisal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppraisalGoals">
+            <EntityTypeMapping TypeName="AppraisalModel.AppraisalGoal">
+              <MappingFragment StoreEntitySet="AppraisalGoals">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ManagerComments" ColumnName="ManagerComments" />
+                <ScalarProperty Name="EmployeeComments" ColumnName="EmployeeComments" />
+                <ScalarProperty Name="ManagerRating" ColumnName="ManagerRating" />
+                <ScalarProperty Name="EmployeeRating" ColumnName="EmployeeRating" />
+                <ScalarProperty Name="AppraisalID" ColumnName="AppraisalID" />
+                <ScalarProperty Name="GoalsID" ColumnName="GoalsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppraisalPolicies">
+            <EntityTypeMapping TypeName="AppraisalModel.AppraisalPolicy">
+              <MappingFragment StoreEntitySet="AppraisalPolicy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="AppraisalModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="AppraisalStatus" ColumnName="AppraisalStatus" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="IsAppraiser" ColumnName="IsAppraiser" />
+                <ScalarProperty Name="IsHR" ColumnName="IsHR" />
+                <ScalarProperty Name="AppraisalPolicyID" ColumnName="AppraisalPolicyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoalCategories">
+            <EntityTypeMapping TypeName="AppraisalModel.GoalCategory">
+              <MappingFragment StoreEntitySet="GoalCategory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Goals">
+            <EntityTypeMapping TypeName="AppraisalModel.Goal">
+              <MappingFragment StoreEntitySet="Goals">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GoalDescription" ColumnName="GoalDescription" />
+                <ScalarProperty Name="GoalCategoryID" ColumnName="GoalCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="AppraisalModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

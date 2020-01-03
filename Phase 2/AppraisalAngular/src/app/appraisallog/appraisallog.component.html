@@ -1,0 +1,47 @@
+<h5>APPRAISAL LOG</h5>
+<div class="action-space">
+    
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="Designation">
+      <th mat-header-cell *matHeaderCellDef> Designation </th>
+      <td mat-cell *matCellDef="let element"> {{element.Designation}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="DateofJoining">
+      <th mat-header-cell *matHeaderCellDef> Date of Joining </th>
+      <td mat-cell *matCellDef="let element"> {{element.DOJ | date :  "dd.MM.y"}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Manager">
+      <th mat-header-cell *matHeaderCellDef> Manager </th>
+      <td mat-cell *matCellDef="let element"> {{element.Manager}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="AppraisalStatus">
+      <th mat-header-cell  *matHeaderCellDef > Appraisal Status </th>
+      <td mat-cell *matCellDef="let element" >
+           <button *ngIf="showButton" mat-button ngDefaultControl class="initiateButton" (click)="InitiateProcess(element)">{{element.AppraisalStatus}}</button>
+           <button *ngIf="hideButton" mat-button ngDefaultControl class="initiateButton" >{{element.AppraisalStatus}}</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+  
+  

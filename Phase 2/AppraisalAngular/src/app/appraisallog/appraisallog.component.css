@@ -1,0 +1,28 @@
+.action-space
+{   
+    width: 74%; 
+    height: 75%;
+   
+    overflow:auto; 
+}
+
+table
+{
+width: 100%;
+
+}
+
+th
+{
+  font-weight: bold;
+}
+
+.initiateButton
+{
+    background-color: lightgray;
+}
+
+.initiateButton:hover
+{
+    background-color: darkgray;
+}

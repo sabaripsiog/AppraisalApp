@@ -1,0 +1,22 @@
+.card
+{
+    float: left;
+    width: 20%;
+    height: 75%;
+    background-color: white;
+    margin: 50px 25px 50px 25px;
+    box-shadow: 0px 30px 40px rgba(0,0,0,.2);
+    overflow: hidden;
+}
+
+#profile-pic
+{
+    width: 100%;
+    float: center;
+}
+
+.employee-details
+{
+    line-height: 3px;
+    text-align: center;
+}
