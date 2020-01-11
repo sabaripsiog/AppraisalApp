@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AppraisalModelStoreContainer" CdmEntityContainer="AppraisalDBEntities">
+    <EntitySetMapping Name="Appraisals">
+      <EntityTypeMapping TypeName="AppraisalModel.Appraisal">
+        <MappingFragment StoreEntitySet="Appraisal">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppraisalGoals">
+      <EntityTypeMapping TypeName="AppraisalModel.AppraisalGoal">
+        <MappingFragment StoreEntitySet="AppraisalGoals">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ManagerComments" ColumnName="ManagerComments" />
+          <ScalarProperty Name="EmployeeComments" ColumnName="EmployeeComments" />
+          <ScalarProperty Name="ManagerRating" ColumnName="ManagerRating" />
+          <ScalarProperty Name="EmployeeRating" ColumnName="EmployeeRating" />
+          <ScalarProperty Name="AppraisalID" ColumnName="AppraisalID" />
+          <ScalarProperty Name="GoalsID" ColumnName="GoalsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppraisalPolicies">
+      <EntityTypeMapping TypeName="AppraisalModel.AppraisalPolicy">
+        <MappingFragment StoreEntitySet="AppraisalPolicy">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="AppraisalModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+          <ScalarProperty Name="IsAppraiser" ColumnName="IsAppraiser" />
+          <ScalarProperty Name="IsHR" ColumnName="IsHR" />
+          <ScalarProperty Name="AppraisalPolicyID" ColumnName="AppraisalPolicyID" />
+          <ScalarProperty Name="AppraisalStatus" ColumnName="AppraisalStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoalCategories">
+      <EntityTypeMapping TypeName="AppraisalModel.GoalCategory">
+        <MappingFragment StoreEntitySet="GoalCategory">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Goals">
+      <EntityTypeMapping TypeName="AppraisalModel.Goal">
+        <MappingFragment StoreEntitySet="Goals">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GoalDescription" ColumnName="GoalDescription" />
+          <ScalarProperty Name="GoalCategoryID" ColumnName="GoalCategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="AppraisalModel.UserDetail">
+        <MappingFragment StoreEntitySet="UserDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
