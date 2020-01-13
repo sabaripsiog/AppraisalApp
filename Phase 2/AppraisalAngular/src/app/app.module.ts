@@ -14,7 +14,7 @@ import { MatGridListModule, MatIconModule, MatMenuModule, MatSelectModule, MatTo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppraisallogComponent } from './appraisallog/appraisallog.component';
 import { MatTableModule } from '@angular/material/table';
-import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GoallistComponent } from './goallist/goallist.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
@@ -22,6 +22,10 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { appRoutes } from './user-routes';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthInterceptor } from './auth/auth.interceptors';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { HelpComponent } from './help/help.component';
 
 
 @NgModule({
@@ -35,7 +39,9 @@ import { appRoutes } from './user-routes';
     DialogBoxComponent,
     UserComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    HelpComponent,
+   
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -58,9 +64,15 @@ import { appRoutes } from './user-routes';
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    DragDropModule
   ],
-  providers: [],
+  providers: [AuthGuard,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : AuthInterceptor,
+      multi : true
+    }],
   bootstrap: [AppComponent],
   entryComponents: [
    DialogBoxComponent

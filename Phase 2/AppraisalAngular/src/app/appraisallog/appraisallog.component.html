@@ -1,6 +1,10 @@
-<h5>APPRAISAL LOG</h5>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<div *ngIf="show">
+<div *ngIf="(isHR === 'True' || isAppraiser === 'True')">
+  <div *ngIf="(isHR === 'True')">
+
 <div class="action-space">
-    
+  <h5>APPRAISAL LOG</h5>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
@@ -33,8 +37,43 @@
     <ng-container matColumnDef="AppraisalStatus">
       <th mat-header-cell  *matHeaderCellDef > Appraisal Status </th>
       <td mat-cell *matCellDef="let element" >
-           <button *ngIf="showButton" mat-button ngDefaultControl class="initiateButton" (click)="InitiateProcess(element)">{{element.AppraisalStatus}}</button>
-           <button *ngIf="hideButton" mat-button ngDefaultControl class="initiateButton" >{{element.AppraisalStatus}}</button>
+         <div *ngIf="(element.AppraisalStatus === 'Yet to initiate'); else regular">
+           <button mat-button ngDefaultControl class="initiateButton" (click)="InitiateProcess(element)">Initiate</button>
+          </div>
+          <ng-template #regular>
+            {{element.AppraisalStatus}}
+          </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Progress">
+      <th mat-header-cell  *matHeaderCellDef > Progress </th>
+      <td mat-cell *matCellDef="let element" > 
+        <div *ngIf="(element.AppraisalStatus === 'Yet to initiate')">
+          <div class="progress">
+            <div class="progress-bar" style="width:0%;height: 15px;">0%</div>
+          </div>
+        </div>
+        <div *ngIf="(element.AppraisalStatus === 'Initiated by HR')">
+          <div class="progress">
+            <div class="progress-bar" style="width:25%;height: 15px;">25%</div>
+          </div>
+        </div>
+        <div *ngIf="(element.AppraisalStatus === 'Form set by Manager')">
+          <div class="progress">
+            <div class="progress-bar" style="width:50%;height: 15px;">50%</div>
+          </div>
+        </div>
+        <div *ngIf="(element.AppraisalStatus === 'Form submitted by Employee')">
+          <div class="progress">
+            <div class="progress-bar" style="width:75%;height: 15px;">75%</div>
+          </div>
+        </div>
+        <div *ngIf="(element.AppraisalStatus === 'Completed')">
+          <div class="progress">
+            <div class="progress-bar" style="width:100%;height: 15px;"></div>
+          </div>
+        </div>
       </td>
     </ng-container>
 
@@ -42,6 +81,101 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+</div>
 
+<div *ngIf="(isHR === 'False' && isAppraiser === 'True')">
+  <h5>APPRAISAL LOG</h5>
+  <div class="action-space">
+    
+    <table mat-table [dataSource]="AppraisalSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
   
+    <!-- Position Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+    </ng-container>
   
+    <!-- Name Column -->
+    <ng-container matColumnDef="Designation">
+      <th mat-header-cell *matHeaderCellDef> Designation </th>
+      <td mat-cell *matCellDef="let element"> {{element.Designation}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="DateofJoining">
+      <th mat-header-cell *matHeaderCellDef> Date of Joining </th>
+      <td mat-cell *matCellDef="let element"> {{element.DOJ | date :  "dd.MM.y"}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="AppraisalStatus">
+      <th mat-header-cell *matHeaderCellDef> Appraisal Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.AppraisalStatus}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Form">
+      <th mat-header-cell  *matHeaderCellDef > Form </th>
+      <td mat-cell *matCellDef="let element" > 
+        <button *ngIf="element.AppraisalStatus === 'Initiated by HR'"mat-button class="initiateButton" (click)="passEmployeeDetails(element)" ngDefaultControl>Create form</button>
+        <button *ngIf="(element.AppraisalStatus === 'Form set by Manager') || (element.AppraisalStatus === 'Completed') "mat-button class="initiateButton" (click)="passEmployeeDetails(element)" ngDefaultControl>View form</button>
+        <button *ngIf="element.AppraisalStatus === 'Form submitted by Employee'"mat-button class="initiateButton" (click)="passEmployeeDetails(element)" ngDefaultControl>Fill form</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Progress">
+      <th mat-header-cell  *matHeaderCellDef > Progress </th>
+      <td mat-cell *matCellDef="let element" > 
+        <div *ngIf="(element.AppraisalStatus === 'Yet to initiate')">
+          <div class="progress">
+            <div class="progress-bar" style="width:0%;height: 15px;">0%</div>
+          </div>
+        </div>
+        <div *ngIf="(element.AppraisalStatus === 'Initiated by HR')">
+          <div class="progress">
+            <div class="progress-bar" style="width:25%;height: 15px;">25%</div>
+          </div>
+        </div>
+        <div *ngIf="(element.AppraisalStatus === 'Form set by Manager')">
+          <div class="progress">
+            <div class="progress-bar" style="width:50%;height: 15px;">50%</div>
+          </div>
+        </div>
+        <div *ngIf="(element.AppraisalStatus === 'Form submitted by Employee')">
+          <div class="progress">
+            <div class="progress-bar" style="width:75%;height: 15px;">75%</div>
+          </div>
+        </div>
+        <div *ngIf="(element.AppraisalStatus === 'Completed')">
+          <div class="progress">
+            <div class="progress-bar" style="width:100%;height: 15px;"></div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="ManagerColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: ManagerColumns;"></tr>
+  </table>
+</div>
+</div>
+</div>
+<div *ngIf="(isAppraiser === 'False')">
+  <h5>APPRAISAL</h5>
+  <div id="employee-view">
+<div *ngIf="(appraisalStatus === 'Form set by Manager');else template" id="employee-content">
+  Your appraisal process has been initiated. <a id="click-here" (click)="takeEmployeetoForm()">Click here</a> to fill the form
+</div>
+<ng-template>
+  You don't have any appraisal right now.
+</ng-template>
+<div *ngIf="(appraisalStatus === 'Form submitted by Employee') || (appraisalStatus === 'Completed')" id="employee-content">
+  You have submitted your appraisal form. <a id="click-here" (click)="takeEmployeetoForm()">Click here</a> to view the form
+</div>
+  </div>
+</div>
+</div>
+

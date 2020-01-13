@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { DataService } from 'src/app/data/data.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,58 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-showHeader = false;
-  constructor() { }
-
-  ngOnInit() {
+employeeObject : any;
+showHeader = true;
+showToggle : any;
+color = 'warn';
+checked = false;
+  mySubscription: any;
+  constructor(private router: Router,private dataService : DataService) { 
+    
   }
-
+ 
+  
+ 
+  ngOnInit() {
+    this.dataService.currentMessage.subscribe( data =>{
+      console.log(data);
+      if(data.IsAppraiser == 'True' && data.IsHR == 'False')
+      this.showToggle = 'True';
+     
+      
+    })
+  }
+ 
+  goHome()
+  {
+    console.log('asas');
+    this.dataService.currentMessage.subscribe( data =>{
+      console.log(data);
+      
+    })
+   
+    this.router.navigate(['/home']);
+  }
+  
+  getHelp()
+  {
+    this.router.navigate(['/help']);
+  }
+  Logout() {
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('loggedInEmployeeID');
+    localStorage.removeItem('loggedInEmployeeName');
+    localStorage.removeItem('loggedInEmployeeDOB');
+    localStorage.removeItem('loggedInEmployeeDOJ');
+    localStorage.removeItem('loggedInEmployeeDesignation');
+    localStorage.removeItem('loggedInEmployeeGender');
+    localStorage.removeItem('loggedInEmployeeManagerID');
+    localStorage.removeItem('loggedInEmployeeIsAppraiser');
+    localStorage.removeItem('loggedInEmployeeIsHR');
+    localStorage.removeItem('loggedInEmployeeAppraisalStatus');
+    localStorage.removeItem('appraiserToggle');
+    localStorage.removeItem('ManagerToggle');
+    this.router.navigate(['/login']);
+  }
+ 
 }

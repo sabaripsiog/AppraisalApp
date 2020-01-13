@@ -1,0 +1,158 @@
+#totalpage
+{
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+}
+
+.action-space
+{
+    margin: 5px 30px 30px 40px;
+    width: 60%;
+    height: 70vh;
+    float: left;
+    overflow: auto;
+    background-color: white;
+}
+
+#topic
+{
+    margin: 20px 0px 0px 40px;
+    width: 60%;
+}
+
+.container
+{
+    width: 100%;
+}
+
+button
+{
+    margin: 10px 10px 10px 10px ;
+    float: left;
+    position: relative;
+}
+
+mat-grid-list
+{
+    background-color: white;
+}
+
+#suggestion-list
+{
+    text-align: center;
+    height: 43.2vh;
+    width: 32%;
+    float: left;
+    background-color: white;
+    margin: 0px 10px 10px 0px ;
+    position: relative;
+
+    overflow: auto;
+}
+
+
+
+#selected-employee-details
+{
+    height: 25vh;
+    width: 32%;
+    float: left;
+    background-color: white;
+    margin: 0px 10px 10px 0px ;
+    position: relative;
+
+    text-align: center;
+}
+
+#suggestbutton
+{
+    
+    position: relative;
+    background-color: cadetblue;
+    width: 95%;
+    height: auto;
+    white-space: normal;
+    overflow: auto;
+}
+
+
+#heading
+{
+    margin: 5px 5px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 999;
+}
+
+.priority
+{
+    text-align: center;
+    width: 10%;
+}
+
+.form-fill-space
+{
+    margin: 5px 30px 30px 40px;
+    width: 94%;
+    height: 70vh;
+    float: left;
+    overflow: auto;
+    background-color: white;
+}
+
+
+.goalID
+{
+    text-align: center;
+    width: 10%;
+}
+
+.goaldetail
+{
+    text-align: left;
+    width: 30%;
+}
+
+.priority
+{
+    text-align: center;
+    width: 10%;
+}
+
+.rating
+{
+    text-align: center;
+    width: 10%;
+    margin: 0px 5px 0px 5px;
+}
+
+.comments
+{
+    text-align: center;
+    width: 30%;
+    margin: 0px 5px 0px 5px;
+}
+
+.action
+{
+    text-align: center;
+    width: 10%;
+}
+
+.header-cell
+{
+    text-align: center;
+}
+
+mat-select
+{
+    width: 40%;
+}
+
+#display-employee
+{
+    float: left;
+    position: relative;
+}

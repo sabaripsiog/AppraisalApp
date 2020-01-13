@@ -1,12 +1,17 @@
 <div class="card">
-    <div class="profile-pic">
+    
+    <div *ngIf="gender == 'Female';" class="profile-pic">
         <img src="../../../assets/female_icon.png" alt="profile-pic">
-    </div> 
+    </div>
+    <div *ngIf="gender == 'Male';" class="profile-pic">
+        <img src="../../../assets/male_icon.png" alt="profile-pic">
+    </div>
+    
     <div class="employee-details">
-        <h5>Welcome, Sampoorna!</h5>
-        <h6>ID : P04</h6>
-        <h6>Designation : HR executive</h6>
-        <h6>Date of Birth : 22-04-1992</h6>
-        <h6>Date of joining : 22-12-2017</h6>
+        <h5>Welcome, {{name}}!</h5>
+        <h6>ID : {{id}}</h6>
+        <h6>Designation : {{designation}}</h6>
+        <h6>Date of Birth : {{dob | date :  "dd.MM.y"}}</h6>
+        <h6>Date of joining : {{doj | date :  "dd.MM.y"}}</h6>
     </div>
 </div>

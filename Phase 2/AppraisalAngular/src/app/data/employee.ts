@@ -1,5 +1,5 @@
 export class Employee {
-    id : string;
+    ID : string;
     name : string;
     dob : Date;
     doj : Date;

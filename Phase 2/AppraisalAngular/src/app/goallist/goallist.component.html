@@ -1,37 +1,296 @@
-<!-- app.component.html -->
-<div class="container text-center">
+<div *ngIf="showContent" id="totalpage">
+<div *ngIf="isAccessAppraiser === 'True'">
+<app-header></app-header>
+<div *ngFor="let category of categories; let i = index">
+<div *ngIf="category.categoryID == pageNumber">
+<div>
+  <div id="topic">
+  <strong><b>{{category.category}} Goals</b></strong>
+</div>
 
-    <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add Goal</button>
-  
-    <table mat-table [dataSource]="dataSource" #mytable class="my-table mat-elevation-z8">
+<div *ngIf="(appraisalStatus === 'Initiated by HR') || (appraisalStatus === 'Form set by Manager')"class="action-space">
+<div *ngIf="appraisalStatus === 'Initiated by HR'" class="container text-center">
+    <table mat-table [dataSource]='currentDataSource()' #mytable class="my-table mat-elevation-z8">
   
       <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
   
       <!-- Id Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> ID. </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> ID. </th>
+        <td class="goalID" mat-cell *matCellDef="let element"> {{element.id}} </td>
       </ng-container>
   
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Goal </th>
+        <td class="goaldetail" mat-cell *matCellDef="let element"> {{element.goal}} </td>
       </ng-container>
   
       <!-- Action Column -->
+      <ng-container matColumnDef="priority">
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Weightage </th>
+        <td class="priority" mat-cell *matCellDef="let element"> {{element.priority}}
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element" class="action-link"> 
-          <a (click)="openDialog('Update',element)">Edit</a> | 
-          <a (click)="openDialog('Delete',element)">Delete</a>  
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Action </th>
+        <td class="action" mat-cell *matCellDef="let element" class="action-link"> 
+          <a style="cursor:pointer; text-align: center; margin-left: 150px ;" (click)="openDialog('Update',element)">Edit</a> | 
+          <a style="cursor:pointer; text-align: center; " (click)="openDialog('Delete',element)">Delete</a>  
         </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-  
+    
   </div>
   
+  <div *ngIf="appraisalStatus === 'Form set by Manager'" class="container text-center">
+    <table mat-table [dataSource]='currentDataSource()' #mytable class="my-table mat-elevation-z8">
+  
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> ID. </th>
+        <td class="goalID" mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Goal </th>
+        <td class="goaldetail" mat-cell *matCellDef="let element"> {{element.goal}} </td>
+      </ng-container>
+  
+      <!-- Action Column -->
+      <ng-container matColumnDef="priority">
+        <th class="header-cell" class="priority" mat-header-cell *matHeaderCellDef> Weightage </th>
+        <td class="priority" mat-cell *matCellDef="let element"> {{element.priority}}
+        </td>
+      </ng-container>
+
+     
+  
+      <tr mat-header-row *matHeaderRowDef="ViewDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: ViewDisplayedColumns;"></tr>
+    </table>
+    
+  </div>
+</div>
+<div class="form-fill-space" *ngIf="(appraisalStatus === 'Form submitted by Employee') ||(appraisalStatus === 'Completed')">
+  <div *ngIf="(appraisalStatus === 'Form submitted by Employee') ||(appraisalStatus === 'Completed')" class="container text-center">
+    <table mat-table [dataSource]='currentDataSource()' #mytable class="my-table mat-elevation-z8">
+  
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> ID. </th>
+        <td class="goalID" mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Goal </th>
+        <td class="goaldetail" mat-cell *matCellDef="let element"> {{element.goal}} </td>
+      </ng-container>
+  
+      <!-- Action Column -->
+      <ng-container matColumnDef="priority">
+        <th class="header-cell" class="priority" mat-header-cell *matHeaderCellDef> Weightage </th>
+        <td class="priority" mat-cell *matCellDef="let element"> {{element.priority}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="e-rating">
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Employee Rating </th>
+        <td class="rating" mat-cell *matCellDef="let element"> 
+          {{element.employeeRating}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="e-comments">
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Employee Comments </th>
+        <td class="comments" mat-cell *matCellDef="let element"> 
+          {{element.employeeComments}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="m-rating">
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Your Rating </th>
+        <td class="rating" mat-cell *matCellDef="let element"> 
+          <div *ngIf="(appraisalStatus === 'Form submitted by Employee')">
+          <mat-select placeholder="select" [(ngModel)]="element.managerRating">
+            <mat-option *ngFor="let rating of ratings"  [value]="rating.value" ngDefaultControl>
+              {{rating.viewValue}}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div *ngIf="(appraisalStatus === 'Completed')">
+          {{element.managerRating}}
+        </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="m-comments">
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Your Comments </th>
+        <td class="comments" mat-cell *matCellDef="let element"> 
+          <div *ngIf="(appraisalStatus === 'Form submitted by Employee')">
+          <textarea matInput [(ngModel)]="element.managerComments" placeholder="Leave a comment"></textarea>
+          </div>
+          <div *ngIf="(appraisalStatus === 'Completed')">
+            {{element.managerComments}}
+          </div>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="FinalColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: FinalColumns;"></tr>
+    </table>
+    
+  </div>
+</div>
+
+</div>
+<div *ngIf="((appraisalStatus === 'Initiated by HR')|| (appraisalStatus === 'Form set by Manager')); else displayEmployee"id="selected-employee-details">
+  <h6><b>SELECTED EMPLOYEE DETAILS</b></h6>
+        <h6>ID : {{ employeeID }}</h6>
+        <h6>Name : {{ name }}</h6>
+        <h6>Designation : {{ Designation }}</h6>
+        <h6>Date of Birth : {{ dob | date :  "dd.MM.y" }}</h6>
+        <h6>Date of joining : {{ doj | date :  "dd.MM.y" }}</h6>
+        
+</div>
+
+<div id="suggestion-list" *ngIf="appraisalStatus === 'Initiated by HR'"> 
+  <h6 id="heading"><b>SUGGESTION LIST</b></h6>
+  <div *ngFor="let data of dataArray; let i=index; trackBy: trackByFn">
+  <button id="suggestbutton" mat-button value="Carriage&#13;&#10;return&#13;&#10;separators" (click)="addSuggestion(data)" mat-flat-button>{{data.goal}}</button>
+</div>
+
+</div>
+<button *ngIf="appraisalStatus === 'Initiated by HR'" id="add-option" mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add Goal</button>
+<button *ngIf="(category.categoryID === 2 || category.categoryID === 3);" (click)="goPreviousPage()" id="save-option" mat-flat-button color="primary">Previous</button>
+<button *ngIf="(category.categoryID === 1 || category.categoryID === 2);" (click)="saveAndNext()" id="save-option" mat-flat-button color="primary">Next</button>
+<button *ngIf="(category.categoryID === 3)&& (appraisalStatus === 'Initiated by HR');" id="save-option" (click)="submitAppraisal()" mat-flat-button color="primary">Submit</button>
+<button *ngIf="(category.categoryID === 3)&& (appraisalStatus === 'Form submitted by Employee');" id="save-option" (click)="submitFinalAppraisal()" mat-flat-button color="primary">Submit</button>
+<button *ngIf="(appraisalStatus === 'Form set by Manager') || (appraisalStatus === 'Completed');" id="save-option" (click)="goBack()" mat-flat-button color="primary">Go Back</button>
+
+</div>
+</div>
+</div>
+
+
+
+
+<div *ngIf="isAccessAppraiser === 'False'">
+  <app-header></app-header>
+  <div *ngFor="let category of categories; let i = index">
+  <div *ngIf="category.categoryID == pageNumber">
+  <div>
+    <div id="topic">
+    <strong><b>{{category.category}} Goals</b></strong>
+  </div>
+  <div class="form-fill-space">
+
+    <div *ngIf="appraisalStatus === 'Form set by Manager'" class="container text-center">
+      <table mat-table [dataSource]='currentDataSource()' #mytable class="my-table mat-elevation-z8">
+    
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th class="header-cell" mat-header-cell *matHeaderCellDef> ID. </th>
+          <td class="goalID" mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th class="header-cell" mat-header-cell *matHeaderCellDef> Goal </th>
+          <td class="goaldetail" mat-cell *matCellDef="let element"> {{element.goal}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="rating">
+          <th class="header-cell" mat-header-cell *matHeaderCellDef> Your Rating </th>
+          <td class="rating" mat-cell *matCellDef="let element"> 
+            <mat-select placeholder="select" [(ngModel)]="element.employeeRating">
+              <mat-option *ngFor="let rating of ratings"  [value]="rating.value" ngDefaultControl>
+                {{rating.viewValue}}
+              </mat-option>
+            </mat-select>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="comments">
+          <th class="header-cell" mat-header-cell *matHeaderCellDef> Your Comments </th>
+          <td class="comments" mat-cell *matCellDef="let element"> 
+            <textarea matInput [(ngModel)]="element.employeeComments" placeholder="Leave a comment"></textarea>
+          </td>
+        </ng-container>
+       
+    
+        <tr mat-header-row *matHeaderRowDef="FillDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: FillDisplayedColumns;"></tr>
+      </table>
+      
+    </div>
+
+    <div *ngIf="(appraisalStatus === 'Form submitted by Employee') || (appraisalStatus === 'Completed')" class="container text-center">
+      <table mat-table [dataSource]='currentDataSource()' #mytable class="my-table mat-elevation-z8">
+    
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th class="header-cell" mat-header-cell *matHeaderCellDef> ID. </th>
+          <td class="goalID" mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th class="header-cell" mat-header-cell *matHeaderCellDef> Goal </th>
+          <td class="goaldetail" mat-cell *matCellDef="let element"> {{element.goal}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="rating">
+          <th class="header-cell" mat-header-cell *matHeaderCellDef> Your Rating </th>
+          <td class="rating" mat-cell *matCellDef="let element"> 
+            {{element.employeeRating}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="comments">
+          <th class="header-cell" mat-header-cell *matHeaderCellDef> Your Comments </th>
+          <td class="comments" mat-cell *matCellDef="let element"> 
+            {{element.employeeComments}}
+          </td>
+        </ng-container>
+       
+    
+        <tr mat-header-row *matHeaderRowDef="FillDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: FillDisplayedColumns;"></tr>
+      </table>
+      
+    </div>
+    
+  </div>
+
+  <button *ngIf="(category.categoryID === 2 || category.categoryID === 3);" (click)="goPreviousPage()" id="save-option" mat-flat-button color="primary">Previous</button>
+  <button *ngIf="(category.categoryID === 1 || category.categoryID === 2);" (click)="saveComments()" id="save-option" mat-flat-button color="primary">Next</button>
+  
+  <button *ngIf="(appraisalStatus === 'Form set by Manager') && (category.categoryID === 3);" id="save-option" mat-flat-button color="primary" (click)="submitByEmployee()">Submit</button>
+  <button *ngIf="(appraisalStatus === 'Form submitted by Employee') || (appraisalStatus === 'Completed')" id="save-option" (click)="goBack()" mat-flat-button color="primary">Go Back</button>
+  
+</div>
+ 
+  </div>
+  </div>
+  </div>
+</div>

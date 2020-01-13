@@ -1,11 +1,19 @@
 <!-- dialog-box.component.html -->
-<h1 mat-dialog-title><strong>{{action}}</strong></h1>
+<h4 mat-dialog-title><strong>{{action}} Goal and Weightage</strong></h4>
 <div mat-dialog-content>
   <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
-    <input placeholder="{{action}} Goal" matInput [(ngModel)]="local_data.name">
+    
+    <h6><strong>Goal</strong></h6>
+    <input matInput [(ngModel)]="local_data.goal">
+    <h6><strong>Weightage</strong></h6>
+  <mat-select (selectionChange)="changePriority($event.value)">
+    <mat-option *ngFor="let priority of priorities"  [value]="priority.value" ngDefaultControl>
+      {{priority.viewValue}}
+    </mat-option>
+  </mat-select>
   </mat-form-field>
   <ng-template #elseTemplate>
-    Sure to delete <b>{{local_data.name}}</b>?
+    Sure to delete <b>{{local_data.goal}}</b>?
   </ng-template>
 </div>
 <div mat-dialog-actions>

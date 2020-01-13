@@ -3,5 +3,5 @@ export class Appraisal{
     Status : string;
     StartDate : Date;
     EndDate : Date;
-    EmployeeID : string
+    Employee_ID : string
 }

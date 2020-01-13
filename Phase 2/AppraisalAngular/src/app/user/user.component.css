@@ -1,7 +1,14 @@
+body
+{
+    
+    height: 100vh;
+  
+}
+
 .container
 {
     width: 50%;
     height: 50%;
     float: center;
-    margin-top: 60px;
+    margin-top: 8%;
 }

@@ -1,8 +1,12 @@
+.title
+{
+    margin: 15px 5px 5px 0px;
+}
 .action-space
 {   
     width: 74%; 
     height: 75%;
-   
+   margin: 30px 5px 5px 0px;
     overflow:auto; 
 }
 
@@ -25,4 +29,30 @@ th
 .initiateButton:hover
 {
     background-color: darkgray;
+}
+
+#employee-view
+{
+    margin: 2px 30px 50px 0px;
+    background-color: white;
+    height: 75%;
+    width: 72%;
+    float: left;
+}
+
+#employee-content
+{
+    margin: 10px;
+}
+
+#click-here
+{
+    cursor: pointer;
+}
+
+button
+{
+    width: 60%;
+    white-space: normal;
+    
 }

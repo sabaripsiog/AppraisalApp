@@ -3,10 +3,15 @@ import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface UsersData {
-  name: string;
+  goal: string;
   id: number;
+  priority:number;
 }
 
+export interface Priority {
+  value: number;
+  viewValue: number;
+}
 
 @Component({
   selector: 'app-dialog-box',
@@ -17,6 +22,13 @@ export class DialogBoxComponent {
 
   action:string;
   local_data:any;
+
+  priorities: Priority[] = [
+    {value: 4, viewValue: 4},
+    {value: 3, viewValue: 3},
+    {value: 2, viewValue: 2},
+    {value: 1, viewValue: 1}
+  ];
 
   constructor(
     public dialogRef: MatDialogRef<DialogBoxComponent>,
@@ -33,6 +45,11 @@ export class DialogBoxComponent {
 
   closeDialog(){
     this.dialogRef.close({event:'Cancel'});
+  }
+
+  changePriority(value)
+  {
+    this.local_data.priority = value;
   }
 
 }

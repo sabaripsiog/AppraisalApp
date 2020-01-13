@@ -6,6 +6,7 @@ import { Employee } from '../data/employee';
 import { HttpClient } from '@angular/common/http';
 import {formatDate } from '@angular/common';
 import { Appraisal } from '../data/appraisal'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-appraisallog',
@@ -13,56 +14,96 @@ import { Appraisal } from '../data/appraisal'
   styleUrls: ['./appraisallog.component.css']
 })
 export class AppraisallogComponent implements OnInit{
-  displayedColumns: string[] = ['Name', 'Designation', 'DateofJoining', 'Manager', 'AppraisalStatus'];
+  displayedColumns: string[] = ['Name', 'Designation', 'DateofJoining', 'Manager', 'AppraisalStatus','Progress'];
+  ManagerColumns: string[] = ['Name', 'Designation', 'DateofJoining', 'AppraisalStatus','Form','Progress'];
   dataSource = new MatTableDataSource();
   AppraisalSource = new MatTableDataSource();
   currentDate = new Date();
   appraisal: Appraisal = new Appraisal();
-  public showButton = true;
-  public hideButton = false;
-  
+  message:any;
+  isHR : any;
+  isAppraiser : any;
+  show : boolean = false;
+  toggle : any;
+  appraisalStatus: any;
+  id : any;
   ngOnInit() {
-    this.httpService.get<Employee[]>('https://localhost:44324/api/GetDetails').subscribe(  
-      data => {  this.dataSource = new  MatTableDataSource(data) as any ;
-      console.log(this.dataSource);
-      console.log("Before for loop");
+    this.isAppraiser = localStorage.getItem('loggedInEmployeeIsAppraiser');
+    this.isHR = localStorage.getItem('loggedInEmployeeIsHR');
+this.appraisalStatus = localStorage.getItem('loggedInEmployeeAppraisalStatus');
+this.id = localStorage.getItem('loggedInEmployeeID');
+this.http.get<Employee[]>('https://localhost:44373/api/GetMyEmployees?'+'id='+ this.id).subscribe(  
+        newData => {  this.AppraisalSource = new  MatTableDataSource(newData) as any ;
+
+      }  
+        ,err=>{  
+          console.log(err);  
+        });
+    this.dataService.currentMessage.subscribe( message => {this.message = message;
     
-      for (let i = 0; i < data.length; i++) 
-      {
-        console.log(data);
-      this.appraisal.StartDate = this.currentDate;
-      this.appraisal.EndDate = null;
-      this.appraisal.Status = 'Initiate';
-      this.appraisal.EmployeeID = data[i].id;
-      if(data[i].AppraisalStatus == "Initiate")
-      {
-      this.postRegisterForm(this.appraisal).subscribe();
-      }
-      }
+      this.isAppraiser = this.message.IsAppraiser;
+      this.isHR = this.message.IsHR;
+      this.appraisalStatus = this.message.AppraisalStatus;
+      this.id = this.message.ID;
+      this.http.get<Employee[]>('https://localhost:44373/api/GetMyEmployees?'+'id='+ this.id).subscribe(  
+        newData => {  this.AppraisalSource = new  MatTableDataSource(newData) as any ;
+
+      }  
+        ,err=>{  
+          console.log(err);  
+        });
+  },err=>{  
+    console.log(err);  
+  });
+    this.http.get<Employee[]>('https://localhost:44373/api/GetDetails').subscribe(  
+      data => {  this.dataSource = new  MatTableDataSource(data) as any ;
+      
     }  
       ,err=>{  
         console.log(err);  
-      })
-    }
-
+      });
+      setTimeout(() => {
+        this.show = true;
+    }, 200);
+      
+  }
      InitiateProcess(obj){
-       if(obj.AppraisalStatus != "Initiate")
+       if(obj.AppraisalStatus == "Yet to initiate")
        {
-       obj.AppraisalStatus = "Initiated";
-       this.updateEmployee(obj).subscribe();
+       obj.AppraisalStatus = "Initiated by HR";
+       this.appraisal.StartDate = this.currentDate;
+      this.appraisal.EndDate = null;
+      this.appraisal.Status = 'Initiated by HR';
+      this.appraisal.Employee_ID = obj.ID;
+      
+       this.dataService.updateEmployee(obj).subscribe();
+       this.dataService.postRegisterForm(this.appraisal).subscribe();
        }
     }
-    public postRegisterForm(appraisal:Appraisal): Observable<any> {
-      console.log("Entered the post method");
-      return this.httpService.post('https://localhost:44324/api/PostAppraisalList', appraisal);
-    }
+    
+passEmployeeDetails(obj)
+{
+  localStorage.setItem('EmployeeID', obj.ID);
+  localStorage.setItem('EmployeeName', obj.Name);
+  localStorage.setItem('EmployeeDesignation', obj.Designation);
+  localStorage.setItem('EmployeeDOB', obj.DOB);
+  localStorage.setItem('EmployeeDOJ', obj.DOJ);
+  localStorage.setItem('EmployeeAppraisalStatus', obj.AppraisalStatus);
+  this.router.navigate(['/form']);
+}
 
-    public updateEmployee(employee: Employee): Observable<any> {
-      console.log("Entered the update method");
-      return this.httpService.put('https://localhost:44324/api/UpdateEmployee/'+ employee.id, employee);
-    }
+takeEmployeetoForm()
+{
+  localStorage.setItem('EmployeeID', localStorage.getItem('loggedInEmployeeID'));
+  localStorage.setItem('EmployeeName', localStorage.getItem('loggedInEmployeeName'));
+  localStorage.setItem('EmployeeDesignation', localStorage.getItem('loggedInEmployeeDesignation'));
+  localStorage.setItem('EmployeeDOB', localStorage.getItem('loggedInEmployeeDOB'));
+  localStorage.setItem('EmployeeDOJ', localStorage.getItem('loggedInEmployeeDOJ'));
+  localStorage.setItem('EmployeeAppraisalStatus', localStorage.getItem('loggedInEmployeeAppraisalStatus'));
+  this.router.navigate(['/form']);
+}
 
-  constructor(private httpService: HttpClient) {}
+  constructor(private dataService : DataService,private http:HttpClient,private router : Router) {}
   
 }
 
