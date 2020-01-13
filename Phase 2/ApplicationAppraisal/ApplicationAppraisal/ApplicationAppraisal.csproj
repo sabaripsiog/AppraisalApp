@@ -193,6 +193,7 @@
     <Compile Include="Models\UserDetail.cs">
       <DependentUpon>Appraisal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\MailSender.cs" />
     <Compile Include="Utilities\UserSession.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />

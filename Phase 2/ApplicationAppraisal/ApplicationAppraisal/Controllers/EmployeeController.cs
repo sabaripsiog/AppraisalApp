@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Data.Entity;
 using System.Data.Objects;
 using ApplicationAppraisal.Models;
+using ApplicationAppraisal.Utilities;
 
 namespace AppraisalApplication.Controllers
 {
@@ -186,7 +187,10 @@ namespace AppraisalApplication.Controllers
                     entity.AppraisalPolicy_ID = employee.AppraisalPolicy_ID;
                     entity.AppraisalStatus = employee.AppraisalStatus;
 
+                    string Manager = RetreivalActions.getManager(entity.ManagerID);
+                    string mailID = RetreivalActions.getManagerMail(entity.ManagerID);
                     db.SaveChanges();
+                    MailSender.EmailGeneration(Manager,"True",mailID,entity.Name);
                     return Ok(db.Employees);
                 }
 
@@ -257,6 +261,7 @@ namespace AppraisalApplication.Controllers
                     entity.AppraisalStatus = employee.AppraisalStatus;
 
                     db.SaveChanges();
+                    MailSender.EmailGeneration(entity.ManagerID, "False", entity.Email, entity.Name);
                     return Ok(entity);
                 }
 
