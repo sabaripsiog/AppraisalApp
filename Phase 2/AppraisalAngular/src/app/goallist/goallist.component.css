@@ -1,3 +1,8 @@
+body
+{
+background-color: lightgrey;
+}
+
 #totalpage
 {
     width: 100%;
@@ -7,7 +12,7 @@
 
 .action-space
 {
-    margin: 5px 30px 30px 40px;
+    margin: 5px 30px 30px 30px;
     width: 60%;
     height: 70vh;
     float: left;
@@ -15,9 +20,10 @@
     background-color: white;
 }
 
+
 #topic
 {
-    margin: 20px 0px 0px 40px;
+    margin: 20px 0px 0px 30px;
     width: 60%;
 }
 
@@ -28,8 +34,8 @@
 
 button
 {
-    margin: 10px 10px 10px 10px ;
-    float: left;
+    margin: 5px 10px;
+    float: center;
     position: relative;
 }
 
@@ -41,7 +47,7 @@ mat-grid-list
 #suggestion-list
 {
     text-align: center;
-    height: 43.2vh;
+    height: 43.5vh;
     width: 32%;
     float: left;
     background-color: white;
@@ -59,7 +65,7 @@ mat-grid-list
     width: 32%;
     float: left;
     background-color: white;
-    margin: 0px 10px 10px 0px ;
+    margin: 5px 10px 10px 0px ;
     position: relative;
 
     text-align: center;
@@ -69,14 +75,18 @@ mat-grid-list
 {
     
     position: relative;
-    background-color: cadetblue;
+    background-color:rgba(121, 121, 121, 0.5);
     width: 95%;
     height: auto;
     white-space: normal;
     overflow: auto;
 }
 
-
+.action-buttons
+{
+    width: 60%;
+    float: center;
+}
 #heading
 {
     margin: 5px 5px;
@@ -102,6 +112,26 @@ mat-grid-list
     background-color: white;
 }
 
+#add-option
+{
+    left: 20em;
+    bottom: 1em;
+}
+#submit
+{
+    left: 20em;
+    bottom: 1em;
+}
+#save-option-previous
+{
+    left: 20em;
+    bottom: 1em;
+}
+#save-option-next
+{
+    left: 20em;
+    bottom: 1em;
+}
 
 .goalID
 {

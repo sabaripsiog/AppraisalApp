@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./appraisallog.component.css']
 })
 export class AppraisallogComponent implements OnInit{
-  displayedColumns: string[] = ['Name', 'Designation', 'DateofJoining', 'Manager', 'AppraisalStatus','Progress'];
-  ManagerColumns: string[] = ['Name', 'Designation', 'DateofJoining', 'AppraisalStatus','Form','Progress'];
+  displayedColumns: string[] = ['Name', 'Designation', 'DateofJoining', 'Manager', 'AppraisalStatus'];
+  ManagerColumns: string[] = ['Name', 'Designation', 'DateofJoining', 'AppraisalStatus','Form'];
   dataSource = new MatTableDataSource();
   AppraisalSource = new MatTableDataSource();
   currentDate = new Date();

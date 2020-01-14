@@ -8,7 +8,7 @@ import { FooterComponent } from './Layout/footer/footer.component';
 import { DisplaycardComponent } from './Layout/displaycard/displaycard.component';
 import { LayoutModule } from './Layout/layout.module';
 import { CommonModule } from '@angular/common';
-import { NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule, MatIconModule, MatMenuModule, MatSelectModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatSlideToggleModule, MatDialogModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +25,6 @@ import { appRoutes } from './user-routes';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptors';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { HelpComponent } from './help/help.component';
 
 
 @NgModule({
@@ -40,7 +39,6 @@ import { HelpComponent } from './help/help.component';
     UserComponent,
     LoginComponent,
     HomeComponent,
-    HelpComponent,
    
   ],
   imports: [
@@ -65,7 +63,8 @@ import { HelpComponent } from './help/help.component';
     BrowserAnimationsModule,
     MatTableModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    NgbModule
   ],
   providers: [AuthGuard,
     {

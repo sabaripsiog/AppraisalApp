@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+<body>
+
 <div *ngIf="showContent" id="totalpage">
 <div *ngIf="isAccessAppraiser === 'True'">
 <app-header></app-header>
@@ -157,7 +160,7 @@
 </div>
 
 </div>
-<div *ngIf="((appraisalStatus === 'Initiated by HR')|| (appraisalStatus === 'Form set by Manager')); else displayEmployee"id="selected-employee-details">
+<div *ngIf="((appraisalStatus === 'Initiated by HR')|| (appraisalStatus === 'Form set by Manager')); else displayEmployee" id="selected-employee-details">
   <h6><b>SELECTED EMPLOYEE DETAILS</b></h6>
         <h6>ID : {{ employeeID }}</h6>
         <h6>Name : {{ name }}</h6>
@@ -174,13 +177,14 @@
 </div>
 
 </div>
+<div class="action-buttons">
 <button *ngIf="appraisalStatus === 'Initiated by HR'" id="add-option" mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add Goal</button>
-<button *ngIf="(category.categoryID === 2 || category.categoryID === 3);" (click)="goPreviousPage()" id="save-option" mat-flat-button color="primary">Previous</button>
-<button *ngIf="(category.categoryID === 1 || category.categoryID === 2);" (click)="saveAndNext()" id="save-option" mat-flat-button color="primary">Next</button>
-<button *ngIf="(category.categoryID === 3)&& (appraisalStatus === 'Initiated by HR');" id="save-option" (click)="submitAppraisal()" mat-flat-button color="primary">Submit</button>
-<button *ngIf="(category.categoryID === 3)&& (appraisalStatus === 'Form submitted by Employee');" id="save-option" (click)="submitFinalAppraisal()" mat-flat-button color="primary">Submit</button>
-<button *ngIf="(appraisalStatus === 'Form set by Manager') || (appraisalStatus === 'Completed');" id="save-option" (click)="goBack()" mat-flat-button color="primary">Go Back</button>
-
+<button *ngIf="(category.categoryID === 2 || category.categoryID === 3);" (click)="goPreviousPage()" id="save-option-previous" mat-flat-button color="primary">Previous</button>
+<button *ngIf="(category.categoryID === 1 || category.categoryID === 2);" (click)="saveAndNext()" id="save-option-next" mat-flat-button color="primary">Next</button>
+<button *ngIf="(category.categoryID === 3)&& (appraisalStatus === 'Initiated by HR');" id="submit" (click)="submitAppraisal()" mat-flat-button color="primary">Submit</button>
+<button *ngIf="(category.categoryID === 3)&& (appraisalStatus === 'Form submitted by Employee');" id="submit" (click)="submitFinalAppraisal()" mat-flat-button color="primary">Submit</button>
+<button *ngIf="(appraisalStatus === 'Form set by Manager') || (appraisalStatus === 'Completed');" id="submit" (click)="goBack()" mat-flat-button color="primary">Go Back</button>
+</div>
 </div>
 </div>
 </div>
@@ -294,3 +298,5 @@
   </div>
   </div>
 </div>
+  
+</body>

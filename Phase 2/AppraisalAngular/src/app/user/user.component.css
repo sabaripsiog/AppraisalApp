@@ -2,7 +2,7 @@ body
 {
     
     height: 100vh;
-  
+    background-color: lightgrey;
 }
 
 .container
@@ -11,4 +11,9 @@ body
     height: 50%;
     float: center;
     margin-top: 8%;
+}
+
+.card-title
+{
+    text-align: center;
 }

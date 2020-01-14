@@ -15,11 +15,10 @@
 
 .navbar-icons
 {
- 
   float: right;
-  margin-right: 30px;
+  
   cursor: pointer;
-  width: 10%;
+  
 }
 
 
@@ -42,4 +41,9 @@ mat-icon:hover
   float: left;
   margin: 10px;
   width: 200px;
+}
+
+#logout-button
+{
+  background-color: white;
 }
