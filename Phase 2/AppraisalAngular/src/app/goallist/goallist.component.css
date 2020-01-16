@@ -158,10 +158,20 @@ mat-grid-list
     margin: 0px 5px 0px 5px;
 }
 
+
+
 .comments
 {
     text-align: center;
-    width: 30%;
+    width: 20%;
+    margin: 0px 5px 0px 5px;
+}
+
+
+.m-comments
+{
+    text-align: center;
+    width: 40%;
     margin: 0px 5px 0px 5px;
 }
 

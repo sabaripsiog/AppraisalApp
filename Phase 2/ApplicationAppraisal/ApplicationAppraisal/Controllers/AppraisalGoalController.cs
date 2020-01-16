@@ -1,4 +1,5 @@
-﻿using ApplicationAppraisal.Models;
+﻿using ApplicationAppraisal.Helpers;
+using ApplicationAppraisal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,8 +36,9 @@ namespace ApplicationAppraisal.Controllers
                 return Ok(newAppraisal);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
         }
@@ -70,8 +72,9 @@ namespace ApplicationAppraisal.Controllers
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
         }
@@ -101,8 +104,9 @@ namespace ApplicationAppraisal.Controllers
                 return Ok(entity.ToList());
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
         }

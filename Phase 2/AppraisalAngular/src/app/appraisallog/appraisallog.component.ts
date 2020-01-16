@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Employee } from '../data/employee';
 import { HttpClient } from '@angular/common/http';
 import {formatDate } from '@angular/common';
 import { Appraisal } from '../data/appraisal'
 import { Router } from '@angular/router';
+import { ViewComponent } from '../view/view.component';
 
 @Component({
   selector: 'app-appraisallog',
@@ -103,7 +104,15 @@ takeEmployeetoForm()
   this.router.navigate(['/form']);
 }
 
-  constructor(private dataService : DataService,private http:HttpClient,private router : Router) {}
+openViewDialog()
+{
+  const dialogRef = this.dialog.open(ViewComponent, {
+    width: '700px',
+  });
+}
+
+
+  constructor(private dataService : DataService,private http:HttpClient,private router : Router,public dialog: MatDialog) {}
   
 }
 

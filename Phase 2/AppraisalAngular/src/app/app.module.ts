@@ -25,6 +25,7 @@ import { appRoutes } from './user-routes';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptors';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ViewComponent } from './view/view.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     UserComponent,
     LoginComponent,
     HomeComponent,
+    ViewComponent,
    
   ],
   imports: [
@@ -74,7 +76,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     }],
   bootstrap: [AppComponent],
   entryComponents: [
-   DialogBoxComponent
+   DialogBoxComponent,
+   ViewComponent
   ],
 })
 export class AppModule { }

@@ -160,6 +160,7 @@
     <Compile Include="Controllers\AppraisalGoalController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="ExceptionLog.cs" />
+    <Compile Include="Helpers\LogFile.cs" />
     <Compile Include="Models\Appraisal.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -311,7 +312,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

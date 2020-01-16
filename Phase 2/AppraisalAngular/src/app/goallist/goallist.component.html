@@ -142,7 +142,7 @@
 
       <ng-container matColumnDef="m-comments">
         <th class="header-cell" mat-header-cell *matHeaderCellDef> Your Comments </th>
-        <td class="comments" mat-cell *matCellDef="let element"> 
+        <td class="m-comments" mat-cell *matCellDef="let element"> 
           <div *ngIf="(appraisalStatus === 'Form submitted by Employee')">
           <textarea matInput [(ngModel)]="element.managerComments" placeholder="Leave a comment"></textarea>
           </div>

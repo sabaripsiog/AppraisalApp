@@ -6,9 +6,18 @@
   <div class="navbar-icons">
   <mat-icon (click)="goHome()">home</mat-icon>
   <mat-icon [matMenuTriggerFor]="menu">person</mat-icon>
+  
   <mat-menu #menu="matMenu">
-    <button id="logout-button" mat-menu-item (click)="Logout()">Log out</button>
+    <p mat-menu-item><b>{{employeeName}}</b></p>
+
+    <div class="divider dropdown-divider"></div>
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item>Help</button>
+
+    <div class="divider dropdown-divider"></div>
+    <button mat-menu-item (click)="Logout()">Log out</button>
   </mat-menu>
   </div>
 
 </mat-toolbar>
+

@@ -1,4 +1,5 @@
 ﻿
+using ApplicationAppraisal.Helpers;
 using ApplicationAppraisal.Models;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,10 @@ namespace AppraisalApplication.Controllers
                 });
                 return Ok(listOfEmployees.ToList());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                LogFile.WriteLog(ex);
                 return BadRequest();
-
             }
         }
 
@@ -58,8 +58,9 @@ namespace AppraisalApplication.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
         }

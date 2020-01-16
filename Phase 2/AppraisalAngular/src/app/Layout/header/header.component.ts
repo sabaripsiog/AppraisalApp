@@ -13,6 +13,7 @@ showHeader = true;
 showToggle : any;
 color = 'warn';
 checked = false;
+employeeName : any;
   mySubscription: any;
   constructor(private router: Router,private dataService : DataService) { 
     
@@ -21,13 +22,14 @@ checked = false;
   
  
   ngOnInit() {
+    this.employeeName = localStorage.getItem('loggedInEmployeeName');
     this.dataService.currentMessage.subscribe( data =>{
       console.log(data);
+      this.employeeName = data.Name;
       if(data.IsAppraiser == 'True' && data.IsHR == 'False')
       this.showToggle = 'True';
-     
-      
-    })
+    });
+    
   }
  
   goHome()

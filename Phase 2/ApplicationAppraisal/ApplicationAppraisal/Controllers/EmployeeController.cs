@@ -9,44 +9,14 @@ using System.Data.Entity;
 using System.Data.Objects;
 using ApplicationAppraisal.Models;
 using ApplicationAppraisal.Utilities;
+using ApplicationAppraisal.Helpers;
 
 namespace AppraisalApplication.Controllers
 {
     public class EmployeesController : ApiController
     {
         private AppraisalDBEntities db = new AppraisalDBEntities();
-        //[HttpGet]
-        //[Route("api/getemployee")]
-        //public IHttpActionResult GetEmployees()
-        //{
-        //    try
-        //    {
-        //        var listOfEmployees = db.Employees.Select(r => new
-        //        {
-        //            ID = r.ID,
-        //            Name = r.Name,
-        //            DOB = r.DOB,
-
-        //            DOJ = r.DOJ,
-
-        //            Email_ID = r.Email,
-        //            BloodType = r.BloodType,
-
-
-        //            Gender = r.Gender,
-
-        //        });
-        //        return Ok(listOfEmployees.ToList());
-        //    }
-        //    catch (Exception)
-
-        //    {
-
-
-        //        return BadRequest();
-
-        //    }
-        //}
+        
         [HttpGet]
         [Route("api/getEmployee/{id=id}")]
         public IHttpActionResult Get(string id)
@@ -85,8 +55,9 @@ namespace AppraisalApplication.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
         }
@@ -94,27 +65,35 @@ namespace AppraisalApplication.Controllers
         [Route("api/Getallemployees")]
         public IHttpActionResult Load()
         {
-            using (AppraisalDBEntities entities = new AppraisalDBEntities())
+            try
             {
-                var listOfEmployees = entities.Employees.Select(r => new
+                using (AppraisalDBEntities entities = new AppraisalDBEntities())
                 {
-                    ID = r.ID,
-                    Name = r.Name,
-                    DOB = r.DOB,
+                    var listOfEmployees = entities.Employees.Select(r => new
+                    {
+                        ID = r.ID,
+                        Name = r.Name,
+                        DOB = r.DOB,
 
-                    DOJ = r.DOJ,
-                    Designation = r.Designation,
-                    Address = r.Address,
-                    BloodType = r.BloodType,
-                    Email = r.Email,
-                    Gender = r.Gender,
-                    ManagerID = r.ManagerID,
-                    IsAppraiser = r.IsAppraiser,
-                    IsHR = r.IsHR,
-                    AppraisalPolicy_ID = r.AppraisalPolicy_ID,
-                    AppraisalStatus = r.AppraisalStatus
-                });
-                return Ok(listOfEmployees.ToList());
+                        DOJ = r.DOJ,
+                        Designation = r.Designation,
+                        Address = r.Address,
+                        BloodType = r.BloodType,
+                        Email = r.Email,
+                        Gender = r.Gender,
+                        ManagerID = r.ManagerID,
+                        IsAppraiser = r.IsAppraiser,
+                        IsHR = r.IsHR,
+                        AppraisalPolicy_ID = r.AppraisalPolicy_ID,
+                        AppraisalStatus = r.AppraisalStatus
+                    });
+                    return Ok(listOfEmployees.ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                LogFile.WriteLog(ex);
+                return BadRequest();
             }
         }
         [HttpGet]
@@ -155,7 +134,8 @@ namespace AppraisalApplication.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                LogFile.WriteLog(ex);
+                return BadRequest();
             }
 
         }
@@ -200,8 +180,9 @@ namespace AppraisalApplication.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
         }
@@ -242,7 +223,8 @@ namespace AppraisalApplication.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                LogFile.WriteLog(ex);
+                return BadRequest();
             }
         }
 
@@ -271,8 +253,9 @@ namespace AppraisalApplication.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
         }

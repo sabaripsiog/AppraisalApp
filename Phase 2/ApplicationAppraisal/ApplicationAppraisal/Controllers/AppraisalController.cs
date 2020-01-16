@@ -1,4 +1,5 @@
-﻿using ApplicationAppraisal.Models;
+﻿using ApplicationAppraisal.Helpers;
+using ApplicationAppraisal.Models;
 using ApplicationAppraisal.Utilities;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,8 @@ namespace AppraisalApplication.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                LogFile.WriteLog(ex);
+                return BadRequest();
             }
         }
 
@@ -68,8 +70,9 @@ namespace AppraisalApplication.Controllers
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
 
@@ -102,8 +105,9 @@ namespace AppraisalApplication.Controllers
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
         }
@@ -132,8 +136,9 @@ namespace AppraisalApplication.Controllers
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.WriteLog(ex);
                 return BadRequest();
             }
 
