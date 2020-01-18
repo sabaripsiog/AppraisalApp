@@ -47,6 +47,7 @@ namespace AppraisalApplication.Controllers
                         AppraisalStatus = entity.AppraisalStatus,
                         Manager = RetreivalActions.getManager(entity.ManagerID)
                     };
+
                     return Ok(listOfEmployees);
                 }
                 else
@@ -129,6 +130,7 @@ namespace AppraisalApplication.Controllers
                                                              where s.ID == r.ManagerID
                                                              select s.Name)
                                               });
+                    
                     return Ok(appraisalEmployees.ToList());
                 }
             }
@@ -259,6 +261,7 @@ namespace AppraisalApplication.Controllers
                 return BadRequest();
             }
         }
+
     }
     
 }

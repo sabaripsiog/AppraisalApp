@@ -108,6 +108,7 @@ openViewDialog()
 {
   const dialogRef = this.dialog.open(ViewComponent, {
     width: '700px',
+    height : '600px',
   });
 }
 

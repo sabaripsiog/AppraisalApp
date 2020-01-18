@@ -26,8 +26,10 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptors';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ViewComponent } from './view/view.component';
-
-
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { ErrorComponent } from './error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,7 @@ import { ViewComponent } from './view/view.component';
     LoginComponent,
     HomeComponent,
     ViewComponent,
+    ErrorComponent,
    
   ],
   imports: [
@@ -66,7 +69,10 @@ import { ViewComponent } from './view/view.component';
     MatTableModule,
     MatDialogModule,
     DragDropModule,
-    NgbModule
+    NgbModule,
+    PdfViewerModule,
+    NgxExtendedPdfViewerModule,
+    PdfJsViewerModule
   ],
   providers: [AuthGuard,
     {
@@ -77,7 +83,8 @@ import { ViewComponent } from './view/view.component';
   bootstrap: [AppComponent],
   entryComponents: [
    DialogBoxComponent,
-   ViewComponent
+   ViewComponent,
+   ErrorComponent
   ],
 })
 export class AppModule { }

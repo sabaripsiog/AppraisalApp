@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
+  isAppraisee: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.isAppraisee = localStorage.getItem('loggedInEmployeeIsAppraiser');
   }
 
 }

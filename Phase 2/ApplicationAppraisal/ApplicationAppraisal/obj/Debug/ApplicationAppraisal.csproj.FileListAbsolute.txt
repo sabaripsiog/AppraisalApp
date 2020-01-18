@@ -98,3 +98,4 @@ C:\Users\Sabarish.a\Documents\GitHub\AppraisalApp\Phase 2\ApplicationAppraisal\A
 C:\Users\Sabarish.a\Documents\GitHub\AppraisalApp\Phase 2\ApplicationAppraisal\ApplicationAppraisal\obj\Debug\ApplicationAppraisal.csproj.CopyComplete
 C:\Users\Sabarish.a\Documents\GitHub\AppraisalApp\Phase 2\ApplicationAppraisal\ApplicationAppraisal\obj\Debug\ApplicationAppraisal.dll
 C:\Users\Sabarish.a\Documents\GitHub\AppraisalApp\Phase 2\ApplicationAppraisal\ApplicationAppraisal\obj\Debug\ApplicationAppraisal.pdb
+C:\Users\Sabarish.a\Documents\GitHub\AppraisalApp\Phase 2\ApplicationAppraisal\ApplicationAppraisal\bin\itextsharp.dll

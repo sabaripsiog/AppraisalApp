@@ -24,7 +24,6 @@ employeeName : any;
   ngOnInit() {
     this.employeeName = localStorage.getItem('loggedInEmployeeName');
     this.dataService.currentMessage.subscribe( data =>{
-      console.log(data);
       this.employeeName = data.Name;
       if(data.IsAppraiser == 'True' && data.IsHR == 'False')
       this.showToggle = 'True';

@@ -8,6 +8,7 @@ import { AppraisalGoals } from '../appraisal-goals';
 import { Appraisal } from '../data/appraisal';
 import { Router } from '@angular/router';
 import { Employee } from '../data/employee';
+import { ErrorComponent } from '../error/error.component';
 
 export interface Goals {
   goal: string;
@@ -104,7 +105,7 @@ ratings: Ratings[] = [
   ngOnInit(){
     setTimeout(()=>this.showContent=true, 100);
     this.isAccessAppraiser = localStorage.getItem('loggedInEmployeeIsAppraiser');
-    console.log(this.isAccessAppraiser);
+    
     this.pageNumber = 1;
     this.dataSource =  this.currentDataSource();
     this.employeeID = localStorage.getItem('EmployeeID');
@@ -120,7 +121,7 @@ ratings: Ratings[] = [
         this.appraisalID = data[0].ID;
         this.dataService.getAllGoals(this.appraisalID).subscribe(
           allGoaldata => {
-            console.log(allGoaldata);
+            
             allGoaldata.forEach(goal => {
               if(goal.GoalCategory_ID == 1)
               {
@@ -248,8 +249,6 @@ this.table.last.renderRows();
 saveAndNext()
 {
   
-    
-  
   this.pageNumber = this.pageNumber+1;
   this.dataSource =  this.currentDataSource();
 }
@@ -288,7 +287,22 @@ currentDataSource()
 
 addSuggestion(obj)
 {
+  let isValue = true;
   this.dataSource =  this.currentDataSource();
+  for(let i=0;i<this.dataSource.length;i++)
+  {
+if(this.dataSource[i].goal.includes(obj.goal) || obj.goal.includes(this.dataSource[i].goal))
+{
+  const dialogRef = this.dialog.open(ErrorComponent, {
+    width: '300px',
+  });
+  isValue = false;
+  break;
+}
+
+  }
+  if(isValue)
+  {
   this.dataSource.push({
     id: this.dataSource.length + 1,
     goal:obj.goal,
@@ -300,6 +314,7 @@ addSuggestion(obj)
     employeeComments:null,
     employeeRating:null
   });
+}
   this.table.first.renderRows();
 this.table.last.renderRows();
 
@@ -324,22 +339,29 @@ submitAppraisal()
         this.appraisalGoals.GoalCategory_ID = element.typeID;
         this.appraisalGoals.Priority = element.priority;
         this.appraisalGoals.Appraisal_ID = data[0].ID;
-
+      
+        
+        console.log(localStorage.getItem('loggedInEmployeeIsAppraiser'));
+       
+       
+        
         this.dataService.GetEmployee(this.LoggedEmployee).subscribe(
           newData => {this.dataService.changeMessage(newData);
           }
         );
+       
         this.dataService.postEmployeeAppraisalGoals(this.appraisalGoals).subscribe();
-        
+       
         this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
-        localStorage.removeItem('EmployeeID');
-        localStorage.removeItem('EmployeeName');
-        localStorage.removeItem('EmployeeDesignation');
-        localStorage.removeItem('EmployeeDOB');
-        localStorage.removeItem('EmployeeDOJ');
-        localStorage.removeItem('EmployeeAppraisalStatus');
-        this.router.navigate(['/home']);
+        
       });
+      
+      setTimeout(() => {
+        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+      }, 100);
+      
+      this.router.navigate(['/home']);
     } 
   )
 
@@ -389,16 +411,17 @@ console.log("array");
         this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
         
       });
-      localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form submitted by Employee");
-      localStorage.removeItem('EmployeeID');
-        localStorage.removeItem('EmployeeName');
-        localStorage.removeItem('EmployeeDesignation');
-        localStorage.removeItem('EmployeeDOB');
-        localStorage.removeItem('EmployeeDOJ');
-        localStorage.removeItem('EmployeeAppraisalStatus');
-        this.router.navigate(['/home']);
-    } 
-  )
+      setTimeout(() => {
+        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+      }, 100);
+      
+    }
+    
+  );
+  localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form submitted by Employee");
+ 
+    this.router.navigate(['/home']);
 }
 
 submitFinalAppraisal()
@@ -435,15 +458,15 @@ console.log("array");
         this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
         
       });
-      localStorage.removeItem('EmployeeID');
-        localStorage.removeItem('EmployeeName');
-        localStorage.removeItem('EmployeeDesignation');
-        localStorage.removeItem('EmployeeDOB');
-        localStorage.removeItem('EmployeeDOJ');
-        localStorage.removeItem('EmployeeAppraisalStatus');
-        this.router.navigate(['/home']);
+      setTimeout(() => {
+        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+      }, 100);
+     
     } 
-  )
+  );
+  localStorage.setItem('loggedInEmployeeAppraisalStatus',"Completed");
+    this.router.navigate(['/home']);
 }
 }
 

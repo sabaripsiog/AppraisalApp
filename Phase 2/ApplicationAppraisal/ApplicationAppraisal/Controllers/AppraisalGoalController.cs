@@ -1,5 +1,6 @@
 ﻿using ApplicationAppraisal.Helpers;
 using ApplicationAppraisal.Models;
+using ApplicationAppraisal.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -102,6 +103,52 @@ namespace ApplicationAppraisal.Controllers
                               });
 
                 return Ok(entity.ToList());
+
+            }
+            catch (Exception ex)
+            {
+                LogFile.WriteLog(ex);
+                return BadRequest();
+            }
+        }
+
+
+
+
+        [HttpGet]
+        [Route("api/viewPDF/{id=id}")]
+        public IHttpActionResult GetPDF(int id, string role, string name, string designation, DateTime doj)
+        {
+            try
+            {
+
+                var entity = (from s in db.AppraisalGoals
+                              where s.Appraisal_ID == id
+                              select s).Select(r => new ProductGoals
+                              {
+                                  ID = r.ID,
+                                  ManagerComments = r.ManagerComments,
+                                  EmployeeComments = r.EmployeeComments,
+                                  ManagerRating = r.ManagerRating,
+                                  EmployeeRating = r.EmployeeRating,
+                                  Appraisal_ID = r.Appraisal_ID,
+                                  Goal = r.Goal,
+                                  GoalCategory_ID = r.GoalCategory_ID,
+                                  Priority = r.Priority,
+                              }).ToList();
+
+                PDFView.getPDFView(entity, role, name, designation,doj);
+
+                if (entity != null)
+                {
+
+
+                    return Ok(entity);
+                }
+                else
+                {
+                    return NotFound();
+                }
 
             }
             catch (Exception ex)

@@ -13,7 +13,7 @@ export class DataService {
   baseUrl = environment.baseUrl;
   isHR : boolean;
   isAppraiser : boolean;
-  
+  url : string;
   private messageSource = new Subject<any>();
   currentMessage = this.messageSource.asObservable();
 
@@ -92,4 +92,13 @@ export class DataService {
     return this.http.get( this.baseUrl + 'api/getAllGoals/'+ id);
   }
 
+  public postPDF(id : number,role : string): Observable<any>
+  {
+    let name = localStorage.getItem('EmployeeName');
+    let designation = localStorage.getItem('EmployeeDesignation');
+    let doj = localStorage.getItem('EmployeeDOJ');
+    console.log(name);
+    console.log(designation);
+    return this.http.get( this.baseUrl + 'api/viewPDF/'+ id +'?role='+role+'&&name='+name+'&&designation='+designation+'&&doj='+doj);
+  }
 }

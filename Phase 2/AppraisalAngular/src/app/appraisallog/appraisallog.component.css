@@ -22,7 +22,16 @@ th
 
 .initiateButton
 {
-    background-color: lightgray;
+    width: 50%;
+    background-color: green;
+    color: white;
+}
+
+.formButton
+{
+    width: 50%;
+    background-color: lightgreen;
+    color: black;
 }
 
 .initiateButton:hover
