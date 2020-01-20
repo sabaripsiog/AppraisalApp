@@ -30,8 +30,9 @@ th
 .formButton
 {
     width: 50%;
-    background-color: lightgreen;
-    color: black;
+    background-color: blueviolet;
+    color: white;
+    
 }
 
 .initiateButton:hover
@@ -41,11 +42,16 @@ th
 
 #employee-view
 {
-    margin: 25px 5px 5px 0px;
+   
     background-color: white;
     height: 75%;
     width: 72%;
     float: left;
+}
+
+#employee-title
+{
+    margin: 20px 5px 5px 0px;
 }
 
 #employee-content
@@ -56,11 +62,13 @@ th
 #click-here
 {
     cursor: pointer;
+    color: blue;
+    
 }
 
 button
 {
     width: 60%;
     white-space: normal;
-    
 }
+

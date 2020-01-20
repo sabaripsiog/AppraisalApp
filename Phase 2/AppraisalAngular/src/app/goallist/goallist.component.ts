@@ -199,7 +199,33 @@ ratings: Ratings[] = [
   }
 
   addRowData(row_obj){
+    let notEmpty = true;
+    let isValue = true;
     this.dataSource =  this.currentDataSource();
+    for(let i=0;i<this.dataSource.length;i++)
+    {
+  if(this.dataSource[i].goal.includes(row_obj.goal) || row_obj.goal.includes(this.dataSource[i].goal))
+  {
+    const dialogRef = this.dialog.open(ErrorComponent, {
+      width: '300px',
+      data : {
+        submitError : false,
+    repeatError : true
+      }
+    });
+    isValue = false;
+    break;
+  }
+}
+if(row_obj.goal === undefined || row_obj.priority === undefined)
+{
+  notEmpty = false;
+  console.log("empty");
+}
+if(notEmpty)
+{
+if(isValue)
+  {
     this.dataSource.push({
       id: this.dataSource.length + 1,
       goal:row_obj.goal,
@@ -211,6 +237,8 @@ ratings: Ratings[] = [
       employeeComments:null,
       employeeRating:null
     });
+  }
+}
     this.table.first.renderRows();
 this.table.last.renderRows();
   }
@@ -295,6 +323,10 @@ if(this.dataSource[i].goal.includes(obj.goal) || obj.goal.includes(this.dataSour
 {
   const dialogRef = this.dialog.open(ErrorComponent, {
     width: '300px',
+    data : {
+      submitError : false,
+  repeatError : true
+    }
   });
   isValue = false;
   break;
@@ -325,9 +357,17 @@ submitAppraisal()
   this.employee={
     AppraisalStatus : "Form set by Manager"
   }
-  this.endArray = this.performanceGoalData.concat(this.competencyGoalData,this.leadershipGoalData)
+  
+  let isValid = true;
 
+  if((this.performanceGoalData.length < 3) || (this.competencyGoalData.length < 3) || (this.leadershipGoalData.length < 3))
+  { 
+    isValid = false;
+  }
 
+  if(isValid)
+  {
+  this.endArray = this.performanceGoalData.concat(this.competencyGoalData,this.leadershipGoalData);
   this.employeeID = localStorage.getItem('EmployeeID');
   this.LoggedEmployee = localStorage.getItem('loggedInEmployeeID');
   
@@ -364,7 +404,17 @@ submitAppraisal()
       this.router.navigate(['/home']);
     } 
   )
-
+  }
+  else
+  {
+    const dialogRef = this.dialog.open(ErrorComponent, {
+      width: '300px',
+      data : {
+        setError : true,
+    repeatError : false
+      }
+    });
+  }
 }
 
 goBack()
@@ -385,6 +435,17 @@ submitByEmployee()
   console.log('sab');
   this.endArray = this.performanceGoalData.concat(this.competencyGoalData,this.leadershipGoalData);
   console.log(this.endArray);
+  let allowSubmit = true;
+  for(let i=0;i<this.endArray.length;i++)
+  {
+    if(this.endArray[i].employeeComments === null || this.endArray[i].employeeRating === null || this.endArray[i].employeeComments === "" || this.endArray[i].employeeRating === "")
+    {
+      allowSubmit = false;
+      break;
+    }
+  }
+  if(allowSubmit)
+  {
   this.employeeID = localStorage.getItem('EmployeeID');
   this.LoggedEmployee = localStorage.getItem('loggedInEmployeeID');
   console.log('sab2');
@@ -423,6 +484,17 @@ console.log("array");
  
     this.router.navigate(['/home']);
 }
+else
+{
+  const dialogRef = this.dialog.open(ErrorComponent, {
+    width: '300px',
+    data : {
+      submitError : true,
+  repeatError : false
+    }
+  });
+}
+}
 
 submitFinalAppraisal()
 {
@@ -432,6 +504,17 @@ submitFinalAppraisal()
   console.log('sab');
   this.endArray = this.performanceGoalData.concat(this.competencyGoalData,this.leadershipGoalData);
   console.log(this.endArray);
+  let allowSubmit = true;
+  for(let i=0;i<this.endArray.length;i++)
+  {
+    if(this.endArray[i].managerComments === null || this.endArray[i].managerRating === null || this.endArray[i].managerRating === "" || this.endArray[i].managerComments === "")
+    {
+      allowSubmit = false;
+      break;
+    }
+  }
+  if(allowSubmit)
+  {
   this.employeeID = localStorage.getItem('EmployeeID');
   this.LoggedEmployee = localStorage.getItem('loggedInEmployeeID');
   console.log('sab2');
@@ -468,9 +551,20 @@ console.log("array");
   localStorage.setItem('loggedInEmployeeAppraisalStatus',"Completed");
     this.router.navigate(['/home']);
 }
+
+else
+{
+  const dialogRef = this.dialog.open(ErrorComponent, {
+    width: '300px',
+    data : {
+      submitError : true,
+  repeatError : false
+    }
+  });
+}
 }
 
-
+}
 
 
 

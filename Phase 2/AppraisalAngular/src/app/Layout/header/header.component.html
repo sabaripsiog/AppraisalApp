@@ -1,21 +1,26 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
 <mat-toolbar color="primary">
-<div class="header">
+  <div class="header">
   <img src="../../../assets/up_logo.jpg" id="logo" alt="logo">
   
 </div>
   <div class="navbar-icons">
-  <mat-icon (click)="goHome()">home</mat-icon>
+    
+      <span id="notif" class="fa fa-bell"></span>
+      <span class="num">2</span>
+    
   <mat-icon [matMenuTriggerFor]="menu">person</mat-icon>
   
-  <mat-menu #menu="matMenu">
-    <p mat-menu-item><b>{{employeeName}}</b></p>
+  <mat-menu #menu="matMenu" class="logout-menu" yPosition="below">
+    <p mat-menu-item class="mat-menu-item"><b>{{employeeName}}</b></p>
 
     <div class="divider dropdown-divider"></div>
-    <button mat-menu-item>Settings</button>
-    <button mat-menu-item>Help</button>
+    <button mat-menu-item class="mat-menu-item">Settings</button>
+    <button mat-menu-item class="mat-menu-item">Help</button>
 
     <div class="divider dropdown-divider"></div>
-    <button mat-menu-item (click)="Logout()">Log out</button>
+    <button mat-menu-item (click)="Logout()" class="mat-menu-item">Log out</button>
   </mat-menu>
   </div>
 

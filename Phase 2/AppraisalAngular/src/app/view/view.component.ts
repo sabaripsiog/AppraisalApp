@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-view',
@@ -8,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class ViewComponent implements OnInit {
   isAppraisee: string;
 
-  constructor() { }
+  constructor( public dialogRef: MatDialogRef<ViewComponent>,) { }
 
   ngOnInit() {
     this.isAppraisee = localStorage.getItem('loggedInEmployeeIsAppraiser');
+   
   }
 
+  exit()
+  {
+    this.dialogRef.close();
+  }
 }

@@ -92,8 +92,8 @@ mat-grid-list
     margin: 5px 5px;
     position: sticky;
     top: 0;
-    background-color: white;
     z-index: 999;
+    background-color: white;
 }
 
 .priority
@@ -114,22 +114,22 @@ mat-grid-list
 
 #add-option
 {
-    left: 20em;
+    left: 1.5em;
     bottom: 1em;
 }
 #submit
 {
-    left: 20em;
+    left: 31.2em;
     bottom: 1em;
 }
 #save-option-previous
 {
-    left: 20em;
+    left: 15em;
     bottom: 1em;
 }
 #save-option-next
 {
-    left: 20em;
+    left: 15em;
     bottom: 1em;
 }
 
@@ -184,6 +184,19 @@ mat-grid-list
 .header-cell
 {
     text-align: center;
+    font-size: small;
+    font-weight: bold;
+    
+    
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+td
+{
+    position: relative;
+    white-space: normal;
 }
 
 mat-select
@@ -195,4 +208,16 @@ mat-select
 {
     float: left;
     position: relative;
+}
+
+textarea
+{
+    resize: none;
+}
+
+mat-icon
+{
+    color: white;
+    width: 20px;
+    
 }

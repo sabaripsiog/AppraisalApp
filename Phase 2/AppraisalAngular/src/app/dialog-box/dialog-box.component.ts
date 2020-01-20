@@ -19,7 +19,7 @@ export interface Priority {
   styleUrls: ['./dialog-box.component.css']
 })
 export class DialogBoxComponent {
-
+isEmpty : boolean;
   action:string;
   local_data:any;
 
@@ -40,7 +40,14 @@ export class DialogBoxComponent {
   }
 
   doAction(){
+    if(this.local_data.goal === undefined || this.local_data.priority === undefined)
+    {
+      this.isEmpty = true;
+    }
+    else
+    {
     this.dialogRef.close({event:this.action,data:this.local_data});
+    }
   }
 
   closeDialog(){

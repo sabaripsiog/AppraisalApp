@@ -65,7 +65,7 @@ this.http.get<Employee[]>('https://localhost:44373/api/GetMyEmployees?'+'id='+ t
       });
       setTimeout(() => {
         this.show = true;
-    }, 200);
+    }, 100);
       
   }
      InitiateProcess(obj){

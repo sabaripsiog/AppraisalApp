@@ -21,7 +21,6 @@
   
 }
 
-
 mat-icon
 {
   color: white;
@@ -48,4 +47,35 @@ mat-icon:hover
 #person
 {
   color: black;
+}
+
+.mat-menu-item
+{
+  width: 150px;
+}
+
+::ng-deep.cdk-overlay-pane{
+  transform: translate(0px, 25px);
+}
+
+
+
+span.fa-bell {
+  position: absolute;
+  font-size: 1em;
+  right: 4em;
+  top: 1.3em;
+  color: white;
+  
+}
+span.num {
+  position: relative;
+  font-size: 0.6em;
+  right: 1.6em;
+  top: -1.4em;
+  color: white;
+  border: 5px solid red;
+  background-color: red;
+
+
 }

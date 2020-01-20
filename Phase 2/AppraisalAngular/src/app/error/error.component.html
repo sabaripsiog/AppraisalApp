@@ -2,7 +2,7 @@
 
 
    
-      
+      <div *ngIf="errorData.repeatError">
       <div class="card-stacked">
         <div class="card-content">
             <h6><b>Oops!!</b></h6>
@@ -12,5 +12,28 @@
             <button class="out-button" mat-button (click)="closeDialog()" mat-flat-button color="warn">OK</button>
         </div>
       </div>
-    
-  
+    </div>
+
+    <div *ngIf="errorData.submitError" >
+      <div class="card-stacked">
+        <div class="card-content">
+            <h6><b>Check!!</b></h6>
+          <p>Some fields are empty. Please do check and fill!</p>
+        </div>
+        <div class="card-action">
+            <button class="out-button" mat-button (click)="closeDialog()" mat-flat-button color="warn">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="errorData.setError" >
+      <div class="card-stacked">
+        <div class="card-content">
+            <h6><b>Set!!</b></h6>
+          <p>Minimum 3 goals have to be set in each category!</p>
+        </div>
+        <div class="card-action">
+            <button class="out-button" mat-button (click)="closeDialog()" mat-flat-button color="warn">OK</button>
+        </div>
+      </div>
+    </div>

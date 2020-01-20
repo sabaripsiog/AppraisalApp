@@ -2,3 +2,12 @@ body
 {
     overflow: hidden;
 }
+
+.exit
+{
+    cursor: pointer;
+    float: right;
+    margin-bottom: 5px;
+    background-color: crimson;
+    color: white;
+}

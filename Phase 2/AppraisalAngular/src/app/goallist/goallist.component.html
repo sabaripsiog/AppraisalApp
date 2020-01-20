@@ -178,11 +178,11 @@
 
 </div>
 <div class="action-buttons">
-<button *ngIf="appraisalStatus === 'Initiated by HR'" id="add-option" mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add Goal</button>
-<button *ngIf="(category.categoryID === 2 || category.categoryID === 3);" (click)="goPreviousPage()" id="save-option-previous" mat-flat-button color="primary">Previous</button>
-<button *ngIf="(category.categoryID === 1 || category.categoryID === 2);" (click)="saveAndNext()" id="save-option-next" mat-flat-button color="primary">Next</button>
-<button *ngIf="(category.categoryID === 3)&& (appraisalStatus === 'Initiated by HR');" id="submit" (click)="submitAppraisal()" mat-flat-button color="primary">Submit</button>
-<button *ngIf="(category.categoryID === 3)&& (appraisalStatus === 'Form submitted by Employee');" id="submit" (click)="submitFinalAppraisal()" mat-flat-button color="primary">Submit</button>
+<button *ngIf="appraisalStatus === 'Initiated by HR'" id="add-option" mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary"><mat-icon>add</mat-icon> Add Goal</button>
+<button [disabled]="(category.categoryID === 1)" (click)="goPreviousPage()" id="save-option-previous" mat-flat-button color="primary"><mat-icon>arrow_back</mat-icon></button>
+<button [disabled]="(category.categoryID === 3)" (click)="saveAndNext()" id="save-option-next" mat-flat-button color="primary"><mat-icon>arrow_forward</mat-icon></button>
+<button *ngIf="(appraisalStatus === 'Initiated by HR');" [disabled]="!(category.categoryID === 3)" id="submit" (click)="submitAppraisal()" mat-flat-button color="primary">Submit <mat-icon>done</mat-icon></button>
+<button *ngIf="(appraisalStatus === 'Form submitted by Employee');" [disabled]="!(category.categoryID === 3)" id="submit" (click)="submitFinalAppraisal()" mat-flat-button color="primary">Submit <mat-icon>done</mat-icon></button>
 <button *ngIf="(appraisalStatus === 'Form set by Manager') || (appraisalStatus === 'Completed');" id="submit" (click)="goBack()" mat-flat-button color="primary">Go Back</button>
 </div>
 </div>
@@ -286,10 +286,10 @@
     
   </div>
 
-  <button *ngIf="(category.categoryID === 2 || category.categoryID === 3);" (click)="goPreviousPage()" id="save-option" mat-flat-button color="primary">Previous</button>
-  <button *ngIf="(category.categoryID === 1 || category.categoryID === 2);" (click)="saveComments()" id="save-option" mat-flat-button color="primary">Next</button>
+  <button [disabled]="(category.categoryID === 1)" (click)="goPreviousPage()" id="save-option-previous" mat-flat-button color="primary"><mat-icon>arrow_back</mat-icon></button>
+  <button [disabled]="(category.categoryID === 3)" (click)="saveComments()" id="save-option-next" mat-flat-button color="primary"><mat-icon>arrow_forward</mat-icon></button>
   
-  <button *ngIf="(appraisalStatus === 'Form set by Manager') && (category.categoryID === 3);" id="save-option" mat-flat-button color="primary" (click)="submitByEmployee()">Submit</button>
+  <button *ngIf="(appraisalStatus === 'Form set by Manager')"  [disabled]="!(category.categoryID === 3)" id="submit" mat-flat-button color="primary" (click)="submitByEmployee()">Submit <mat-icon>done</mat-icon></button>
   <button *ngIf="(appraisalStatus === 'Form submitted by Employee') || (appraisalStatus === 'Completed')" id="save-option" (click)="goBack()" mat-flat-button color="primary">Go Back</button>
   
 </div>
