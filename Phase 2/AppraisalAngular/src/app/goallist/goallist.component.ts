@@ -29,27 +29,27 @@ export interface Ratings {
 
 
 const DATAARRAY1 = [
-  {goal: "Maintains standards consistently. Is consistent in achieving accuracy, neatness, thoroughness, overall effectiveness and attentiveness to detail"},
-   {goal: "Produces expected volume of work in a timely manner."},
-   {goal : "Sets appropriate objectives to meet commitments within budget. Establishes priorities and organizes workflow to meet objectives."},
-   {goal : "Demonstrates willingness to assume additional responsibility."},
-   {goal : "Establishes priorities. Anticipates and prepares for changing workload or working conditions."},
-   {goal: "Maintains acceptable record of attendance"}
+  {goal: "Maintains standards consistently.", disable : false},
+   {goal: "Produces expected volume of work in a timely manner.", disable : false},
+   {goal : "Sets appropriate objectives to meet commitments within budget.", disable : false},
+   {goal : "Demonstrates willingness to assume additional responsibility.", disable : false},
+   {goal : "Establishes priorities. Anticipates and prepares for changing workload or working conditions.", disable : false},
+   {goal: "Maintains acceptable record of attendance", disable : false}
 ];
 
 const DATAARRAY2 = [
-  {goal: "Maintains composure in highly stressful or adverse situations."},
-   {goal: "Increase in conversion rate and production rate"},
-   {goal : "Sets appropriate objectives to meet commitments within budget. Establishes priorities and organizes workflow to meet objectives."},
+  {goal: "Maintains composure in highly stressful or adverse situations.", disable : false},
+   {goal: "Increase in conversion rate and production rate", disable : false},
+   {goal : "Sets appropriate objectives to meet commitments within budget. Establishes priorities and organizes workflow to meet objectives.", disable : false},
    
 ];
 
 const DATAARRAY3 = [
-  {goal: "Knows what FIT information or materials are sensitive and why."},
-   {goal: "Manages, leads, and enables the process of change and transition while helping others deal with the impacts."},
-   {goal : "Sets appropriate objectives to meet commitments within budget. Establishes priorities and organizes workflow to meet objectives."},
-   {goal : "Focuses on results and desired outcomes and how best to achieve them in order to get the job done"},
-   {goal : "Aligns the direction, products, services, and performance of a business line with the rest of the organization."},
+  {goal: "Knows what FIT information or materials are sensitive and why.", disable : false},
+   {goal: "Manages, leads, and enables the process of change and transition while helping others deal with the impacts.", disable : false},
+   {goal : "Sets appropriate objectives to meet commitments within budget. Establishes priorities and organizes workflow to meet objectives.", disable : false},
+   {goal : "Focuses on results and desired outcomes and how best to achieve them in order to get the job done", disable : false},
+   {goal : "Aligns the direction, products, services, and performance of a business line with the rest of the organization.", disable : false},
 ];
 
 
@@ -272,6 +272,12 @@ this.table.last.renderRows();
    
     this.table.first.renderRows();
 this.table.last.renderRows();
+this.dataArray.forEach(element => {
+  if(element.goal === row_obj.goal)
+  {
+    element.disable = false;
+  }
+});
   }
 
 saveAndNext()
@@ -315,6 +321,7 @@ currentDataSource()
 
 addSuggestion(obj)
 {
+  obj.disable = true;
   let isValue = true;
   this.dataSource =  this.currentDataSource();
   for(let i=0;i<this.dataSource.length;i++)
@@ -399,9 +406,11 @@ submitAppraisal()
       setTimeout(() => {
         this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form set by Manager");
+        this.router.navigate(['/home']);
       }, 100);
       
-      this.router.navigate(['/home']);
+      
     } 
   )
   }
@@ -475,14 +484,15 @@ console.log("array");
       setTimeout(() => {
         this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form submitted by Employee");
+ 
+        this.router.navigate(['/home']);
       }, 100);
       
     }
     
   );
-  localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form submitted by Employee");
  
-    this.router.navigate(['/home']);
 }
 else
 {
@@ -544,12 +554,13 @@ console.log("array");
       setTimeout(() => {
         this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        localStorage.setItem('loggedInEmployeeAppraisalStatus',"Completed");
+        this.router.navigate(['/home']);
       }, 100);
      
     } 
   );
-  localStorage.setItem('loggedInEmployeeAppraisalStatus',"Completed");
-    this.router.navigate(['/home']);
+ 
 }
 
 else

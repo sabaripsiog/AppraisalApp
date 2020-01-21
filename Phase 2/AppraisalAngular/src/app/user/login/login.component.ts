@@ -14,6 +14,10 @@ export class LoginComponent implements OnInit {
   constructor(private dataService : DataService, private router : Router) { }
 
   ngOnInit() {
+    if(localStorage.getItem('userToken'))
+    {
+      this.router.navigate(['/home']);
+    }
   }
 
   OnSubmit(userName,password){

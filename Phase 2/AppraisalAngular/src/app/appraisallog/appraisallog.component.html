@@ -40,6 +40,9 @@
          <div *ngIf="(element.AppraisalStatus === 'Yet to initiate'); else regular">
            <button mat-button ngDefaultControl class="initiateButton" (click)="InitiateProcess(element)">Initiate</button>
           </div>
+          <div *ngIf="(element.AppraisalStatus === 'Completed')">
+            {{element.AppraisalStatus}} <a id="click-here" (click)="openViewDialog()"><u>(Form)</u></a>
+           </div>
           <ng-template #regular>
             {{element.AppraisalStatus}}
           </ng-template>

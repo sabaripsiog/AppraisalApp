@@ -67,7 +67,6 @@ mat-grid-list
     background-color: white;
     margin: 5px 10px 10px 0px ;
     position: relative;
-
     text-align: center;
 }
 
@@ -133,70 +132,77 @@ mat-grid-list
     bottom: 1em;
 }
 
-.goalID
-{
-    text-align: center;
-    width: 10%;
-}
-
-.goaldetail
-{
-    text-align: left;
-    width: 30%;
-}
-
-.priority
-{
-    text-align: center;
-    width: 10%;
-}
-
-.rating
-{
-    text-align: center;
-    width: 10%;
-    margin: 0px 5px 0px 5px;
-}
-
-
-
-.comments
-{
-    text-align: center;
-    width: 20%;
-    margin: 0px 5px 0px 5px;
-}
-
-
-.m-comments
-{
-    text-align: center;
-    width: 40%;
-    margin: 0px 5px 0px 5px;
-}
-
-.action
-{
-    text-align: center;
-    width: 10%;
-}
-
 .header-cell
 {
     text-align: center;
-    font-size: small;
+    font-size: 1em;
     font-weight: bold;
-    
-    
+    color: black;
     position: sticky;
     top: 0;
     z-index: 999;
 }
 
-td
+.mat-column-id
 {
-    position: relative;
-    white-space: normal;
+width: 50px;
+text-align: left;
+}
+
+.mat-column-name
+{
+width: 450px;
+text-align: left;
+}
+
+.mat-column-priority
+{
+width: 100px;
+text-align: center;
+}
+
+.mat-column-action
+{
+width: 100px;
+text-align: center;
+}
+
+.mat-column-rating
+{
+width: 200px;
+text-align: center;
+}
+
+.mat-column-comments
+{
+    width: 400px;
+    text-align: center;
+}
+
+
+.mat-column-e-rating
+{
+width: 100px;
+text-align: center;
+}
+
+.mat-column-e-comments
+{
+    width: 300px;
+    text-align: center;
+}
+
+
+.mat-column-m-rating
+{
+width: 200px;
+text-align: center;
+}
+
+.mat-column-m-comments
+{
+    width: 300px;
+    text-align: center;
 }
 
 mat-select
@@ -218,6 +224,5 @@ textarea
 mat-icon
 {
     color: white;
-    width: 20px;
-    
+    width: 20px; 
 }

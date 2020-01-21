@@ -31,9 +31,9 @@ namespace ApplicationAppraisal.Utilities
                 body = "<br/><br/>" +
                     "<b> Dear  " + name + ";</b>" + "<br/><br/>" +
 
-                    employee+"'s"+"appraisal has been initiated. Login through the link below to set his/her appraisal form." +
+                    employee+"'s"+" appraisal has been initiated. Login through the link below to set his/her appraisal form." +
                     "<br/><br/>" +
-                    "<a href='" + "http://localhost:4200/login" + "'>" + "http://localhost:4200/login" + "</a> " + "<br/><br/>" +
+                    "<a href='" + "http://localhost:4200/login" + "'>" + "Appraisal Application" + "</a> " + "<br/><br/>" +
                     "<img src=https://media.glassdoor.com/sqll/945068/psiog-digital-squarelogo-1468915701259.png />" + "<br/>" +
                     "<b>Warm Regards</b>" + "<br/>" + "<b>HR Desk </b>";
             }
@@ -45,7 +45,7 @@ namespace ApplicationAppraisal.Utilities
 
                     "Your appraisal process has been initiated. Login through the link below to fill the appraisal form." +
                     "<br/><br/>" +
-                    "<a href='" + "http://localhost:4200/login" + "'>" + "http://localhost:4200/login" + "</a> " + "<br/><br/>" +
+                    "<a href='" + "http://localhost:4200/login" + "'>" + "Application application" + "</a> " + "<br/><br/>" +
                     "<img src=https://media.glassdoor.com/sqll/945068/psiog-digital-squarelogo-1468915701259.png />" + "<br/>" +
                     "<b>Warm Regards</b>" + "<br/>" + "<b>HR Desk </b>";
             }

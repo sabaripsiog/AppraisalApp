@@ -26,7 +26,7 @@
   
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th class="header-cell" mat-header-cell *matHeaderCellDef> Goal </th>
+        <th class="header-cell" style=" text-align: center;" mat-header-cell *matHeaderCellDef> Goal </th>
         <td class="goaldetail" mat-cell *matCellDef="let element"> {{element.goal}} </td>
       </ng-container>
   
@@ -40,7 +40,7 @@
       <ng-container matColumnDef="action">
         <th class="header-cell" mat-header-cell *matHeaderCellDef> Action </th>
         <td class="action" mat-cell *matCellDef="let element" class="action-link"> 
-          <a style="cursor:pointer; text-align: center; margin-left: 150px ;" (click)="openDialog('Update',element)">Edit</a> | 
+          <a style="cursor:pointer; text-align: center;" (click)="openDialog('Update',element)">Edit</a> | 
           <a style="cursor:pointer; text-align: center; " (click)="openDialog('Delete',element)">Delete</a>  
         </td>
       </ng-container>
@@ -99,13 +99,13 @@
   
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th class="header-cell" mat-header-cell *matHeaderCellDef> Goal </th>
+        <th class="header-cell" mat-header-cell *matHeaderCellDef style="text-align: center;"> Goal </th>
         <td class="goaldetail" mat-cell *matCellDef="let element"> {{element.goal}} </td>
       </ng-container>
   
       <!-- Action Column -->
       <ng-container matColumnDef="priority">
-        <th class="header-cell" class="priority" mat-header-cell *matHeaderCellDef> Weightage </th>
+        <th class="header-cell" mat-header-cell *matHeaderCellDef> Weightage </th>
         <td class="priority" mat-cell *matCellDef="let element"> {{element.priority}}
         </td>
       </ng-container>
@@ -173,7 +173,7 @@
 <div id="suggestion-list" *ngIf="appraisalStatus === 'Initiated by HR'"> 
   <h6 id="heading"><b>SUGGESTION LIST</b></h6>
   <div *ngFor="let data of dataArray; let i=index; trackBy: trackByFn">
-  <button id="suggestbutton" mat-button value="Carriage&#13;&#10;return&#13;&#10;separators" (click)="addSuggestion(data)" mat-flat-button>{{data.goal}}</button>
+  <button id="suggestbutton" [disabled]="data.disable" mat-button value="Carriage&#13;&#10;return&#13;&#10;separators" (click)="addSuggestion(data)" mat-flat-button>{{data.goal}}</button>
 </div>
 
 </div>
@@ -216,7 +216,7 @@
     
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-          <th class="header-cell" mat-header-cell *matHeaderCellDef> Goal </th>
+          <th class="header-cell" style=" text-align: center;" mat-header-cell *matHeaderCellDef> Goal </th>
           <td class="goaldetail" mat-cell *matCellDef="let element"> {{element.goal}} </td>
         </ng-container>
   
