@@ -1,36 +1,44 @@
 
-<div *ngIf="show">
-<div *ngIf="(isHR === 'True' || isAppraiser === 'True')">
-  <div *ngIf="(isHR === 'True')">
+<div [hidden]="!show">
+<div [hidden]="!((isHR === 'True' || isAppraiser === 'True'))">
+  <div [hidden]="!(isHR === 'True')">
 
 <div class="action-space">
-  <h5>APPRAISAL LOG</h5>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <h5 class="page-title">APPRAISAL LOG</h5>
+  <div class="search">
+    <mat-icon id="search-icon">search</mat-icon>
+  <mat-form-field id="search-input">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+</div>
+  <div class="table-content">
+    
+    <table #hBSort="matSort" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortStart="asc">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
   
     <!-- Position Column -->
     <ng-container matColumnDef="Name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
     </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="Designation">
-      <th mat-header-cell *matHeaderCellDef> Designation </th>
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Designation </th>
       <td mat-cell *matCellDef="let element"> {{element.Designation}} </td>
     </ng-container>
   
     <!-- Weight Column -->
-    <ng-container matColumnDef="DateofJoining">
-      <th mat-header-cell *matHeaderCellDef> Date of Joining </th>
+    <ng-container matColumnDef="DOJ">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Date of Joining </th>
       <td mat-cell *matCellDef="let element"> {{element.DOJ | date :  "dd.MM.y"}} </td>
     </ng-container>
   
     <!-- Symbol Column -->
     <ng-container matColumnDef="Manager">
-      <th mat-header-cell *matHeaderCellDef> Manager </th>
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Manager </th>
       <td mat-cell *matCellDef="let element"> {{element.Manager}} </td>
     </ng-container>
 
@@ -41,7 +49,7 @@
            <button mat-button ngDefaultControl class="initiateButton" (click)="InitiateProcess(element)">Initiate</button>
           </div>
           <div *ngIf="(element.AppraisalStatus === 'Completed')">
-            {{element.AppraisalStatus}} <a id="click-here" (click)="openViewDialog()"><u>(Form)</u></a>
+          <a id="click-here" (click)="openViewDialog(element)"><u>(Form)</u></a>
            </div>
           <ng-template #regular>
             {{element.AppraisalStatus}}
@@ -54,46 +62,54 @@
   </table>
 </div>
 </div>
+</div>
 
-<div *ngIf="(isHR === 'False' && isAppraiser === 'True')">
+<div [hidden]="!(isHR === 'False' && isAppraiser === 'True')">
   
   <div class="action-space">
-    <h5>APPRAISAL LOG</h5>
-    <table mat-table [dataSource]="AppraisalSource" class="mat-elevation-z8">
+    <h5 class="page-title">APPRAISAL LOG</h5>
+    <div class="search">
+      <mat-icon id="search-icon">search</mat-icon>
+    <mat-form-field id="search-input">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+  </div>
+  <div class="table-content">
+    <table #sBSort="matSort" mat-table [dataSource]="AppraisalSource" class="mat-elevation-z8" matSort matSortStart="asc">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
   
     <!-- Position Column -->
     <ng-container matColumnDef="Name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
     </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="Designation">
-      <th mat-header-cell *matHeaderCellDef> Designation </th>
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Designation </th>
       <td mat-cell *matCellDef="let element"> {{element.Designation}} </td>
     </ng-container>
   
     <!-- Weight Column -->
-    <ng-container matColumnDef="DateofJoining">
-      <th mat-header-cell *matHeaderCellDef> Date of Joining </th>
+    <ng-container matColumnDef="DOJ">
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Date of Joining </th>
       <td mat-cell *matCellDef="let element"> {{element.DOJ | date :  "dd.MM.y"}} </td>
     </ng-container>
   
     <!-- Symbol Column -->
     <ng-container matColumnDef="AppraisalStatus">
-      <th mat-header-cell *matHeaderCellDef> Appraisal Status </th>
+      <th mat-sort-header mat-header-cell *matHeaderCellDef> Appraisal Status </th>
       <td mat-cell *matCellDef="let element"> {{element.AppraisalStatus}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Form">
       <th mat-header-cell  *matHeaderCellDef > Form </th>
       <td mat-cell *matCellDef="let element" > 
-        <button *ngIf="element.AppraisalStatus === 'Initiated by HR'" mat-button class="formButton" (click)="passEmployeeDetails(element)" ngDefaultControl>Create form</button>
-        <button *ngIf="(element.AppraisalStatus === 'Form set by Manager') || (element.AppraisalStatus === 'Completed') "mat-button class="initiateButton" (click)="openViewDialog()" ngDefaultControl>View form</button>
-        <button *ngIf="element.AppraisalStatus === 'Form submitted by Employee'"mat-button class="initiateButton" (click)="passEmployeeDetails(element)" ngDefaultControl>Fill form</button>
+        <button [hidden]="!(element.AppraisalStatus === 'Initiated by HR')" mat-button class="formButton" (click)="passEmployeeDetails(element)" ngDefaultControl>Create form</button>
+        <button [hidden]="!((element.AppraisalStatus === 'Form set by Manager') || (element.AppraisalStatus === 'Completed')) "mat-button class="initiateButton" (click)="openViewDialog(element)" ngDefaultControl>View form</button>
+        <button [hidden]="!(element.AppraisalStatus === 'Form submitted by Employee')"mat-button class="initiateButton" (click)="passEmployeeDetails(element)" ngDefaultControl>Fill form</button>
       </td>
     </ng-container>
 
@@ -104,21 +120,22 @@
 </div>
 </div>
 </div>
-<div *ngIf="(isAppraiser === 'False')">
+</div>
+<div [hidden]="!(isAppraiser === 'False')">
   
   <div id="employee-title">
     <h5>APPRAISAL</h5>
   </div>
     <div id="employee-view">
     
-<div *ngIf="(appraisalStatus === 'Form set by Manager')" id="employee-content">
+<div [hidden]="!(appraisalStatus === 'Form set by Manager')" id="employee-content">
   Your appraisal process has been initiated. <a id="click-here" (click)="takeEmployeetoForm()"><u>Click here</u></a> to fill the form
 </div>
-<div *ngIf="(appraisalStatus === 'Initiated by HR')" id="employee-content">
+<div [hidden]="!(appraisalStatus === 'Initiated by HR')" id="employee-content">
   You don't have any appraisal right now.
 </div>
-<div *ngIf="(appraisalStatus === 'Form submitted by Employee') || (appraisalStatus === 'Completed')" id="employee-content">
-  You have submitted your appraisal form. <a id="click-here" (click)="openViewDialog()"><u>Click here</u></a> to view the form
+<div [hidden]="!((appraisalStatus === 'Form submitted by Employee') || (appraisalStatus === 'Completed'))" id="employee-content">
+  You have submitted your appraisal form. <a id="click-here" (click)="openViewDialogEmployee()"><u>Click here</u></a> to view the form
 </div>
   </div>
 </div>

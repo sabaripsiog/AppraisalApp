@@ -262,6 +262,51 @@ namespace AppraisalApplication.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("api/AddEmployee")]
+        public IHttpActionResult PostEmployee([FromBody]Employee employee)
+        {
+            try
+            {
+                using (AppraisalDBEntities entities = new AppraisalDBEntities())
+                {
+
+                    entities.Employees.Add(employee);
+                    entities.SaveChanges();
+
+                    var newEmployee = new
+                    {
+
+                        ID = employee.ID,
+                        Name = employee.Name,
+                        DOB = employee.DOB,
+
+                        DOJ = employee.DOJ,
+                        Designation = employee.Designation,
+                        Address = employee.Address,
+                        BloodType = employee.BloodType,
+                        Email = employee.Email,
+                        Gender = employee.Gender,
+                        ManagerID = employee.ManagerID,
+                        IsAppraiser = employee.IsAppraiser,
+                        IsHR = employee.IsHR,
+                        AppraisalPolicy_ID = employee.AppraisalPolicy_ID,
+                        AppraisalStatus = employee.AppraisalStatus
+
+                    };
+
+                    return Ok(newEmployee);
+
+                };
+
+
+            }
+            catch (Exception ex)
+            {
+                LogFile.WriteLog(ex);
+                return BadRequest();
+            }
+        }
     }
     
 }

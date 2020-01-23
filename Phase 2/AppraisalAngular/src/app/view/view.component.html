@@ -1,8 +1,8 @@
 
 <body>
     <mat-icon (click)="exit()" class="exit">clear</mat-icon>
-    <ng2-pdfjs-viewer *ngIf="isAppraisee==='True'" pdfSrc="../Appraiser-View.pdf" style="width: 100%;height: 100%;"></ng2-pdfjs-viewer>
-    <ng2-pdfjs-viewer *ngIf="isAppraisee==='False'" pdfSrc="../Appraisee-View.pdf" style="width: 100%;height: 100%;"></ng2-pdfjs-viewer>
+    <ng2-pdfjs-viewer *ngIf="isAppraisee==='True'" [pdfSrc]="managerSource" style="width: 100%;height: 100%;"></ng2-pdfjs-viewer>
+    <ng2-pdfjs-viewer *ngIf="isAppraisee==='False'" [pdfSrc]="employeeSource" style="width: 100%;height: 100%;"></ng2-pdfjs-viewer>
 </body>
 
     

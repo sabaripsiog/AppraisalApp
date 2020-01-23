@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatSort } from '@angular/material';
 import { Employee } from '../data/employee';
 import { HttpClient } from '@angular/common/http';
 import {formatDate } from '@angular/common';
@@ -15,10 +15,10 @@ import { ViewComponent } from '../view/view.component';
   styleUrls: ['./appraisallog.component.css']
 })
 export class AppraisallogComponent implements OnInit{
-  displayedColumns: string[] = ['Name', 'Designation', 'DateofJoining', 'Manager', 'AppraisalStatus'];
-  ManagerColumns: string[] = ['Name', 'Designation', 'DateofJoining', 'AppraisalStatus','Form'];
-  dataSource = new MatTableDataSource();
-  AppraisalSource = new MatTableDataSource();
+  displayedColumns: string[] = ['Name', 'Designation', 'DOJ', 'Manager', 'AppraisalStatus'];
+  ManagerColumns: string[] = ['Name', 'Designation', 'DOJ', 'AppraisalStatus','Form'];
+  dataSource = new MatTableDataSource<Employee[]>();
+  AppraisalSource = new MatTableDataSource<Employee[]>();
   currentDate = new Date();
   appraisal: Appraisal = new Appraisal();
   message:any;
@@ -65,9 +65,14 @@ this.http.get<Employee[]>('https://localhost:44373/api/GetMyEmployees?'+'id='+ t
       });
       setTimeout(() => {
         this.show = true;
-    }, 50);
+    }, 100);
       
   }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
      InitiateProcess(obj){
        if(obj.AppraisalStatus == "Yet to initiate")
        {
@@ -104,17 +109,39 @@ takeEmployeetoForm()
   this.router.navigate(['/form']);
 }
 
-openViewDialog()
+openViewDialog(obj)
 {
   const dialogRef = this.dialog.open(ViewComponent, {
     width: '700px',
-    height : '600px',
+    height : '500px',
+    data : obj
+  });
+}
+
+openViewDialogEmployee()
+{
+  console.log(localStorage.getItem('loggedInEmployeeName'));
+  const dialogRef = this.dialog.open(ViewComponent, {
+    width: '700px',
+    height : '500px',
+    data : {
+      name : localStorage.getItem('loggedInEmployeeName')
+    }
   });
 }
 
 
-  constructor(private dataService : DataService,private http:HttpClient,private router : Router,public dialog: MatDialog) {}
+@ViewChild('hBSort',{static: false}) hBSort: MatSort;
+@ViewChild('sBSort',{static: false}) sBSort: MatSort;
+
+  constructor(private dataService : DataService,private http:HttpClient,private router : Router,public dialog: MatDialog){}
   
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.dataSource.sort = this.hBSort;
+      this.AppraisalSource.sort = this.sBSort;
+    },1000);
+  }
 }
 
 

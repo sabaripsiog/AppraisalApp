@@ -164,6 +164,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="ExceptionLog.cs" />
     <Compile Include="Helpers\LogFile.cs" />
+    <Compile Include="Helpers\UserLog.cs" />
     <Compile Include="Models\Appraisal.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

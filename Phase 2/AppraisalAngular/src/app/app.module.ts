@@ -30,6 +30,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { ErrorComponent } from './error/error.component';
+	
+import { MatSortModule } from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +75,8 @@ import { ErrorComponent } from './error/error.component';
     NgbModule,
     PdfViewerModule,
     NgxExtendedPdfViewerModule,
-    PdfJsViewerModule
+    PdfJsViewerModule,
+    MatSortModule
   ],
   providers: [AuthGuard,
     {
@@ -80,6 +84,7 @@ import { ErrorComponent } from './error/error.component';
       useClass : AuthInterceptor,
       multi : true
     }],
+    
   bootstrap: [AppComponent],
   entryComponents: [
    DialogBoxComponent,

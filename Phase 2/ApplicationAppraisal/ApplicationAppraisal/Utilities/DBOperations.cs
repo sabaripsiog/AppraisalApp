@@ -1,4 +1,5 @@
-﻿using ApplicationAppraisal.Models;
+﻿using ApplicationAppraisal.Helpers;
+using ApplicationAppraisal.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace ApplicationAppraisal.Utilities
                     {
                         if (string.Compare(password, user.Password) == 0)
                         {
+                            UserLog.WriteLog(user.Username, "Login");
                             return "Login Successful!";
                         }
                         else

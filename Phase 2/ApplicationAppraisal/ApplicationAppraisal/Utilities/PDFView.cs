@@ -25,10 +25,10 @@ namespace ApplicationAppraisal.Utilities
 
             if (role == "True")
             {
-                File.Delete("C:\\Users\\Sabarish.a\\Documents\\GitHub\\AppraisalApp\\Phase 2\\AppraisalAngular\\src\\assets\\pdfjs\\Appraiser-View.pdf");
+                File.Delete("C:\\Users\\Sabarish.a\\Documents\\GitHub\\AppraisalApp\\Phase 2\\AppraisalAngular\\src\\assets\\pdfjs\\Appraiser-View-"+name+".pdf");
 
 
-                System.IO.FileStream fs = new FileStream("C:\\Users\\Sabarish.a\\Documents\\GitHub\\AppraisalApp\\Phase 2\\AppraisalAngular\\src\\assets\\pdfjs\\Appraiser-View.pdf", FileMode.Create);
+                System.IO.FileStream fs = new FileStream("C:\\Users\\Sabarish.a\\Documents\\GitHub\\AppraisalApp\\Phase 2\\AppraisalAngular\\src\\assets\\pdfjs\\Appraiser-View-" + name + ".pdf", FileMode.Create);
 
                 Document document = new Document(PageSize.A4, 25, 25, 30, 30);
 
@@ -151,10 +151,10 @@ namespace ApplicationAppraisal.Utilities
             else
 
             {
-                File.Delete("C:\\Users\\Sabarish.a\\Documents\\GitHub\\AppraisalApp\\Phase 2\\AppraisalAngular\\src\\assets\\pdfjs\\Appraisee-View.pdf");
+                File.Delete("C:\\Users\\Sabarish.a\\Documents\\GitHub\\AppraisalApp\\Phase 2\\AppraisalAngular\\src\\assets\\pdfjs\\Appraisee-View-" + name + ".pdf");
 
 
-                System.IO.FileStream fs = new FileStream("C:\\Users\\Sabarish.a\\Documents\\GitHub\\AppraisalApp\\Phase 2\\AppraisalAngular\\src\\assets\\pdfjs\\Appraisee-View.pdf", FileMode.Create);
+                System.IO.FileStream fs = new FileStream("C:\\Users\\Sabarish.a\\Documents\\GitHub\\AppraisalApp\\Phase 2\\AppraisalAngular\\src\\assets\\pdfjs\\Appraisee-View-" + name + ".pdf", FileMode.Create);
 
                 Document document = new Document(PageSize.A4, 25, 25, 30, 30);
 
