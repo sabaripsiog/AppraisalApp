@@ -1,3 +1,4 @@
+<div class="page" *ngIf="show" >
 <div class="card">
     
     <div *ngIf="gender == 'Female';" class="profile-pic">
@@ -14,4 +15,5 @@
         <h6>Date of Birth : {{dob | date :  "dd.MM.y"}}</h6>
         <h6>Date of joining : {{doj | date :  "dd.MM.y"}}</h6>
     </div>
+</div>
 </div>

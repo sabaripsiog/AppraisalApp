@@ -49,6 +49,17 @@ th
     background-color: darkgray;
 }
 
+.help-icon
+{
+    color: darkmagenta;
+    position: relative;
+    width: 20px; 
+    height: 20px; 
+    margin-left: 10px; 
+    top: 5px; 
+    cursor: pointer;
+}
+
 #employee-view
 {
    

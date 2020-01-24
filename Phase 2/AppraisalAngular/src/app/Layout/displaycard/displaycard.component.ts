@@ -14,10 +14,11 @@ export class DisplaycardComponent implements OnInit {
   designation:any;
   doj:any;
   dob:any;
+  show: boolean = false;
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    setTimeout(() => {
+   
       this.gender = localStorage.getItem('loggedInEmployeeGender');
     this.name = localStorage.getItem('loggedInEmployeeName');
 this.id = localStorage.getItem('loggedInEmployeeID');
@@ -25,13 +26,13 @@ this.designation = localStorage.getItem('loggedInEmployeeDesignation');
 this.dob = localStorage.getItem('loggedInEmployeeDOB');
 this.doj = localStorage.getItem('loggedInEmployeeDOJ');
 
-    }, 250);
+    
     
 
     this.dataService.currentMessage.subscribe( message =>
        {
          this.receiver = message;
-         this.gender = message.gender;
+         this.gender = message.Gender;
 this.name = message.Name;
 this.id = message.ID;
 this.designation = message.Designation;
@@ -41,7 +42,9 @@ this.doj = message.DOJ;
 
     }
       );
-
+setTimeout(() => {
+  this.show = true;
+}, 250);
   }
   
 }

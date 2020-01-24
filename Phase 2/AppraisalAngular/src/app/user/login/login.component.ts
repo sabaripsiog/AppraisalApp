@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
      localStorage.setItem('userToken',data.access_token);
      this.dataService.getEmployeeDetails(userName,password).subscribe(  
       dataObject => {
-        
+        console.log(dataObject.Gender);
         this.dataService.changeMessage(dataObject);
         localStorage.setItem('loggedInEmployeeID',dataObject.ID);
         localStorage.setItem('loggedInEmployeeName',dataObject.Name);

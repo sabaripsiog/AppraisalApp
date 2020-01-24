@@ -4,7 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export interface ErrorData {
   submitError : boolean,
   repeatError : boolean,
-  setError : boolean
+  setError : boolean,
+  message : boolean
 }
 
 @Component({

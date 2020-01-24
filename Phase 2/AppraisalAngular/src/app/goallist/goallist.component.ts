@@ -118,7 +118,7 @@ ratings: Ratings[] = [
     {
     this.dataService.getParticularAppraisal(this.employeeID).subscribe(
       data => { 
-        this.appraisalID = data[0].ID;
+        this.appraisalID = data.ID;
         this.dataService.getAllGoals(this.appraisalID).subscribe(
           allGoaldata => {
             
@@ -178,7 +178,17 @@ ratings: Ratings[] = [
 
   @ViewChildren(MatTable) table !: QueryList<MatTable<any>>;
 
-  
+  openDetailModal()
+  {
+    const dialogRef = this.dialog.open(ErrorComponent, {
+      width: '300px',
+      data:{
+        messageGoal: true,
+        
+      }
+    });
+  }
+
 
   openDialog(action,obj) {
     obj.action = action;
@@ -385,9 +395,9 @@ submitAppraisal()
         this.appraisalGoals.Goal = element.goal;
         this.appraisalGoals.GoalCategory_ID = element.typeID;
         this.appraisalGoals.Priority = element.priority;
-        this.appraisalGoals.Appraisal_ID = data[0].ID;
-      
-        
+        this.appraisalGoals.Appraisal_ID = data.ID;
+      console.log(data);
+        console.log(data.ID)
         console.log(localStorage.getItem('loggedInEmployeeIsAppraiser'));
        
        
@@ -403,12 +413,13 @@ submitAppraisal()
         
       });
       
-      setTimeout(() => {
-        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
-        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+    
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form set by Manager");
+        setTimeout(() => {
         this.router.navigate(['/home']);
-      }, 100);
+      }, 2000);
       
       
     } 
@@ -465,7 +476,7 @@ submitByEmployee()
         this.appraisalGoals.Goal = element.goal;
         this.appraisalGoals.GoalCategory_ID = element.typeID;
         this.appraisalGoals.Priority = element.priority;
-        this.appraisalGoals.Appraisal_ID = data[0].ID;
+        this.appraisalGoals.Appraisal_ID = data.ID;
         this.appraisalGoals.EmployeeComments = element.employeeComments;
         this.appraisalGoals.EmployeeRating = element.employeeRating;
         this.appraisalGoals.ManagerComments = element.managerComments;
@@ -481,13 +492,13 @@ console.log("array");
         this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
         
       });
-      setTimeout(() => {
-        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
-        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+     
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form submitted by Employee");
- 
+        setTimeout(() => {
         this.router.navigate(['/home']);
-      }, 100);
+      }, 2000);
       
     }
     
@@ -535,7 +546,7 @@ submitFinalAppraisal()
         this.appraisalGoals.Goal = element.goal;
         this.appraisalGoals.GoalCategory_ID = element.typeID;
         this.appraisalGoals.Priority = element.priority;
-        this.appraisalGoals.Appraisal_ID = data[0].ID;
+        this.appraisalGoals.Appraisal_ID = data.ID;
         this.appraisalGoals.EmployeeComments = element.employeeComments;
         this.appraisalGoals.EmployeeRating = element.employeeRating;
         this.appraisalGoals.ManagerComments = element.managerComments;
@@ -551,12 +562,13 @@ console.log("array");
         this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
         
       });
-      setTimeout(() => {
-        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
-        this.dataService.postPDF(data[0].ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+     
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+       
         localStorage.setItem('loggedInEmployeeAppraisalStatus',"Completed");
+        setTimeout(() => {
         this.router.navigate(['/home']);
-      }, 100);
+      }, 2000);
      
     } 
   );

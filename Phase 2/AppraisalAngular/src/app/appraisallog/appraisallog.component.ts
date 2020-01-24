@@ -8,6 +8,7 @@ import {formatDate } from '@angular/common';
 import { Appraisal } from '../data/appraisal'
 import { Router } from '@angular/router';
 import { ViewComponent } from '../view/view.component';
+import { ErrorComponent } from '../error/error.component';
 
 @Component({
   selector: 'app-appraisallog',
@@ -71,7 +72,20 @@ this.http.get<Employee[]>('https://localhost:44373/api/GetMyEmployees?'+'id='+ t
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.AppraisalSource.filter = filterValue.trim().toLowerCase();
   }
+
+  openDetailModal()
+  {
+    const dialogRef = this.dialog.open(ErrorComponent, {
+      width: '300px',
+      data:{
+        messageLog: true,
+        
+      }
+    });
+  }
+
 
      InitiateProcess(obj){
        if(obj.AppraisalStatus == "Yet to initiate")

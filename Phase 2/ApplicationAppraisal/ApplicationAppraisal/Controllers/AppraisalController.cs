@@ -123,15 +123,15 @@ namespace AppraisalApplication.Controllers
                 using (AppraisalDBEntities entities = new AppraisalDBEntities())
                 {
                     var entity = entities.Appraisals.FirstOrDefault(e => e.Employee_ID == id && e.Status != "Finished");
-                    var AppraisalList = entities.Appraisals.Select(r => new
+                    var AppraisalList = new
                     {
-                        ID = r.ID,
-                        Status = r.Status,
-                        StartDate = r.StartDate,
-                        EndDate = r.EndDate,
-                        Employee_ID = r.Employee_ID
-                    });
-                    return Ok(AppraisalList.ToList());
+                        ID = entity.ID,
+                        Status = entity.Status,
+                        StartDate = entity.StartDate,
+                        EndDate = entity.EndDate,
+                        Employee_ID = entity.Employee_ID
+                    };
+                    return Ok(AppraisalList);
                 }
 
 

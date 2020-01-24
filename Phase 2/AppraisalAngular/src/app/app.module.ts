@@ -10,7 +10,7 @@ import { LayoutModule } from './Layout/layout.module';
 import { CommonModule } from '@angular/common';
 import { NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatGridListModule, MatIconModule, MatMenuModule, MatSelectModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatSlideToggleModule, MatDialogModule } from '@angular/material';
+import { MatGridListModule, MatIconModule, MatMenuModule, MatSelectModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatSlideToggleModule, MatDialogModule, MatTooltipModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppraisallogComponent } from './appraisallog/appraisallog.component';
 import { MatTableModule } from '@angular/material/table';
@@ -30,7 +30,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { ErrorComponent } from './error/error.component';
-	
 import { MatSortModule } from '@angular/material';
 
 @NgModule({
@@ -76,7 +75,8 @@ import { MatSortModule } from '@angular/material';
     PdfViewerModule,
     NgxExtendedPdfViewerModule,
     PdfJsViewerModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule
   ],
   providers: [AuthGuard,
     {

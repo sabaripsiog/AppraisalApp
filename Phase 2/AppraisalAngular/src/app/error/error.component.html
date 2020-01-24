@@ -37,3 +37,29 @@
         </div>
       </div>
     </div>
+
+
+    <div *ngIf="errorData.messageGoal" >
+      <div class="card-stacked">
+        <div class="card-content">
+            <h6><b>Set!!</b></h6>
+          <p>Add goals using 'Add Goal' button or from the suggestion list, for each category</p>
+        </div>
+        <div class="card-action">
+            <button class="out-button" mat-button (click)="closeDialog()" mat-flat-button color="warn">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="errorData.messageLog" >
+      <div class="card-stacked">
+        <div class="card-content">
+            <h6><b>Appraisal</b></h6>
+          <p>This Log contains pending and in-progress Appraisals</p>
+        </div>
+        <div class="card-action">
+            <button class="out-button" mat-button (click)="closeDialog()" mat-flat-button color="warn">OK</button>
+        </div>
+      </div>
+    </div>
+   

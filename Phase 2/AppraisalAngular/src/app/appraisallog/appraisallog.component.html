@@ -4,7 +4,7 @@
   <div [hidden]="!(isHR === 'True')">
 
 <div class="action-space">
-  <h5 class="page-title">APPRAISAL LOG</h5>
+  <h5 class="page-title">APPRAISAL LOG <mat-icon (click) = "openDetailModal()" matTooltip="Click for info" matTooltipPosition="right" class="help-icon">info</mat-icon></h5>
   <div class="search">
     <mat-icon id="search-icon">search</mat-icon>
   <mat-form-field id="search-input">
@@ -67,7 +67,7 @@
 <div [hidden]="!(isHR === 'False' && isAppraiser === 'True')">
   
   <div class="action-space">
-    <h5 class="page-title">APPRAISAL LOG</h5>
+    <h5 class="page-title">APPRAISAL LOG <mat-icon (click) = "openDetailModal()" matTooltip="Click for info" matTooltipPosition="right" class="help-icon">info</mat-icon></h5>
     <div class="search">
       <mat-icon id="search-icon">search</mat-icon>
     <mat-form-field id="search-input">

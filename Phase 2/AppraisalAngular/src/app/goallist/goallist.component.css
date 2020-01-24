@@ -10,6 +10,17 @@ background-color: lightgrey;
     overflow: auto;
 }
 
+.help-icon
+{
+    color: darkmagenta;
+    position: relative;
+    width: 20px; 
+    height: 20px; 
+    margin-left: 10px; 
+    top: 5px; 
+    cursor: pointer;
+}
+
 .action-space
 {
     margin: 5px 30px 30px 30px;
