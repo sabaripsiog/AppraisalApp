@@ -63,7 +63,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="EmployeeID" Type="varchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <Association Name="Appraisal_Employee">

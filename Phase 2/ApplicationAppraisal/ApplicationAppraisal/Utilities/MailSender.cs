@@ -70,5 +70,53 @@ namespace ApplicationAppraisal.Utilities
             })
                 smtp.Send(message);
         }
+
+        public static void ForgotPassMail(string emailID, string ID)
+        {
+
+            var fromEmail = new MailAddress("sampletest649@gmail.com", "Reset");
+            var toEmail = new MailAddress(emailID);
+            var fromEmailPassword = "Psiog@123";
+
+
+
+            string subject = "";
+            string body = "";
+
+
+            
+
+                subject = "Psiog Digital (P) Ltd";
+                body = "<br/><br/>" +
+                    "<b> Dear User"+";</b>" + "<br/><br/>" +
+
+                      "Your password reset process has started. Please click the link below to reset your password" +
+                    "<br/><br/>" +
+                    "<a href='" + "http://localhost:4200/reset/"+ ID + "'>" + "Reset password" + "</a> " + "<br/><br/>" +
+                    "<img src=https://media.glassdoor.com/sqll/945068/psiog-digital-squarelogo-1468915701259.png />" + "<br/>" +
+                    "<b>Warm Regards</b>" + "<br/>" + "<b>HR Desk </b>";
+            
+           
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
+        }
     }
 }

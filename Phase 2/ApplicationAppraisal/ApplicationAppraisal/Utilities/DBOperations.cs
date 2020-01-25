@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WebApi.Utilities;
+using AppraisalApplication.Utilities;
 
 namespace ApplicationAppraisal.Utilities
 {
@@ -19,7 +19,7 @@ namespace ApplicationAppraisal.Utilities
                     user = entities.UserDetails.Where(u => u.Username == username).FirstOrDefault();
                     if (user != null)
                     {
-                        if (string.Compare(password, user.Password) == 0)
+                        if (string.Compare(Hasher.HashString(password), user.Password) == 0)
                         {
                             UserLog.WriteLog(user.Username, "Login");
                             return "Login Successful!";

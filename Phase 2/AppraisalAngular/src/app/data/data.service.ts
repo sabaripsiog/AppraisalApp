@@ -6,6 +6,10 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Appraisal } from './appraisal';
 import { AppraisalGoals } from '../appraisal-goals';
 
+export class UserName {
+  EmployeeID: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -100,5 +104,22 @@ export class DataService {
     console.log(name);
     console.log(designation);
     return this.http.get( this.baseUrl + 'api/viewPDF/'+ id +'?role='+role+'&&name='+name+'&&designation='+designation+'&&doj='+doj);
+  }
+
+
+  public getUserID(): Observable<any>
+  {
+    return this.http.get( this.baseUrl + 'api/getUsernames');
+  }
+
+  public postForgotForm(UserName: UserName): Observable<any> {
+    return this.http.post( this.baseUrl + 'api/forgot',UserName);
+  }
+  public updatePassword(password : string,id: string): Observable<any> {
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'}) }; 
+    console.log(password);
+    console.log(id);
+
+    return this.http.put(this.baseUrl + 'api/UpdatePassword/'+ id + '?password=' + password,httpOptions);
   }
 }

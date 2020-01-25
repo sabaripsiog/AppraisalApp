@@ -14,7 +14,11 @@
       <i class="material-icons prefix">vpn_key</i>
       <input type="password" #Password ngModel name="Password" placeholder="Password" required>
     </div>
-  </div>
+    <div>
+      <span class="forgot" (click)="openModal()"><u>Forgot Password</u></span>
+    </div>
+    </div>
+
   <div class="row">
       <div class="input-field col s12">
         <button [disabled]="!loginForm.valid" class="btn-large btn-submit" type="submit">Login</button>

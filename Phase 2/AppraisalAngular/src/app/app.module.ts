@@ -31,6 +31,16 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { ErrorComponent } from './error/error.component';
 import { MatSortModule } from '@angular/material';
+import { FieldErrorDisplayModule } from './field-error-display/field-error-display.module';
+import { ForgotpasswordModule } from './forgotpassword/forgotpassword.module';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { SetpasswordComponent } from './setpassword/setpassword.component';
+import { SetpasswordModule } from './setpassword/setpassword.module';
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -46,6 +56,11 @@ import { MatSortModule } from '@angular/material';
     HomeComponent,
     ViewComponent,
     ErrorComponent,
+    ForgotpasswordComponent,
+    SetpasswordComponent
+
+
+    
    
   ],
   imports: [
@@ -76,20 +91,21 @@ import { MatSortModule } from '@angular/material';
     NgxExtendedPdfViewerModule,
     PdfJsViewerModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ForgotpasswordModule,
+    FieldErrorDisplayModule,
+    SetpasswordModule
+
   ],
   providers: [AuthGuard,
-    {
-      provide : HTTP_INTERCEPTORS,
-      useClass : AuthInterceptor,
-      multi : true
-    }],
+    ],
     
   bootstrap: [AppComponent],
   entryComponents: [
    DialogBoxComponent,
    ViewComponent,
-   ErrorComponent
+   ErrorComponent,
+   ForgotpasswordComponent
   ],
 })
 export class AppModule { }

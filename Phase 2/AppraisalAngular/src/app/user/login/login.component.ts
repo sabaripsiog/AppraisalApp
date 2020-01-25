@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data/data.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { ForgotpasswordComponent } from 'src/app/forgotpassword/forgotpassword.component';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +13,21 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   message : any;
   isLoginError : boolean = false;
-  constructor(private dataService : DataService, private router : Router) { }
+  constructor(private dataService : DataService, private router : Router,public dialog: MatDialog) { }
 
   ngOnInit() {
     if(localStorage.getItem('userToken'))
     {
       this.router.navigate(['/home']);
     }
+  }
+
+  openModal()
+  {
+    const dialogRef = this.dialog.open(ForgotpasswordComponent, {
+      width: '350px',
+      height : '400px',
+    });
   }
 
   OnSubmit(userName,password){

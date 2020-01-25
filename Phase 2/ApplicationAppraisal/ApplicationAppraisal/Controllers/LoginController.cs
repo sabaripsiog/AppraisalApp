@@ -10,9 +10,9 @@ using System.Security.Claims;
 
 using System.Web.Http;
 
-using WebApi.Utilities;
+using AppraisalApplication.Utilities;
 
-namespace WebApi.Controllers
+namespace AppraisalApplication.Controllers
 {
     public class LoginController : ApiController
     {
@@ -69,9 +69,10 @@ namespace WebApi.Controllers
         {
             try
             {
+                string hashedPass = Hasher.HashString(password);
                 using (AppraisalDBEntities entities = new AppraisalDBEntities())
                 {
-                    var entity = entities.UserDetails.FirstOrDefault(e => e.Username == username && e.Password == password);
+                    var entity = entities.UserDetails.FirstOrDefault(e => e.Username == username && e.Password == hashedPass);
                     var employee = entities.Employees.FirstOrDefault(e => e.ID == entity.EmployeeID);
                     var listOfEmployees = new
                     {
