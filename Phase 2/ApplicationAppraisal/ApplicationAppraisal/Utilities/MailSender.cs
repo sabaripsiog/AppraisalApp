@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppraisalApplication.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -82,7 +83,7 @@ namespace ApplicationAppraisal.Utilities
 
             string subject = "";
             string body = "";
-
+            string EncodedID = Hasher.EncodeId(ID);
 
             
 
@@ -92,7 +93,7 @@ namespace ApplicationAppraisal.Utilities
 
                       "Your password reset process has started. Please click the link below to reset your password" +
                     "<br/><br/>" +
-                    "<a href='" + "http://localhost:4200/reset/"+ ID + "'>" + "Reset password" + "</a> " + "<br/><br/>" +
+                    "<a href='" + "http://localhost:4200/reset/"+ EncodedID + "'>" + "Reset password" + "</a> " + "<br/><br/>" +
                     "<img src=https://media.glassdoor.com/sqll/945068/psiog-digital-squarelogo-1468915701259.png />" + "<br/>" +
                     "<b>Warm Regards</b>" + "<br/>" + "<b>HR Desk </b>";
             

@@ -23,6 +23,9 @@ export class SetpasswordComponent implements OnInit {
   id: any;
   expire: Boolean;
   submit : boolean = false;
+  hideConfirm = true;
+  hidePass = true;
+  allow = false;
   constructor(private form: FormBuilder,private http: HttpClient,private dataservice: DataService,private route: ActivatedRoute,private router: Router,private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -31,6 +34,26 @@ export class SetpasswordComponent implements OnInit {
     if(token!=null && token){
       this.router.navigate(['/home']);
     }
+    this.dataservice.getUserID().subscribe(
+      data =>{
+        this.id =  this.route.snapshot.params.id;
+        console.log(atob(this.id));
+        console.log(data);
+
+        for(let i=0; i<data.length; i++)
+        {
+          if(data[i].UserName == atob(this.id))
+          {
+            this.allow = true;
+            break;
+          }
+          
+        }
+        if(this.allow == false)
+        {
+          this.router.navigate(['/404']);
+        }
+      });
     this.forgotPasswordForm = this.form.group({
       password: ['', Validators.required],
       confirmPassword:['',Validators.required]
@@ -51,15 +74,32 @@ export class SetpasswordComponent implements OnInit {
     }
   }
 
+  applyFilterPassword(filterValue: string)
+  {
+    if(this.forgotPasswordForm.get('confirmPassword').valid)
+    {
+      if(this.forgotPasswordForm.get('confirmPassword').value != filterValue)
+      {
+        this.errorMsg="Passwords Dont Match";
+        this.forgotPasswordForm.value = false;
+        this.submit = false;
+      }
+      else
+      {
+        this.errorMsg="Passwords Match";
+        this.submit = true;
+      }
+    }
+  }
+
   onSubmit() {
     if (this.forgotPasswordForm.valid) {
-    console.log(this.forgotPasswordForm.value);
-    console.log(this.forgotPasswordForm.get('confirmPassword').value);
-    console.log(this.forgotPasswordForm.get('password').value);
+    
 
       
       
       this.id =  this.route.snapshot.params.id;
+      console.log(this.id);
       this.dataservice.updatePassword(this.forgotPasswordForm.get('password').value, this.id).subscribe();
       this.openSnackBar("Updated password successfully",'Close');
       

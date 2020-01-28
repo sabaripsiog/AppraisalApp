@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   message : any;
   isLoginError : boolean = false;
   constructor(private dataService : DataService, private router : Router,public dialog: MatDialog) { }
-
+  hide = true;
   ngOnInit() {
     if(localStorage.getItem('userToken'))
     {

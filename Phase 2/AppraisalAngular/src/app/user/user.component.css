@@ -1,16 +1,27 @@
 body
 {
-    
+    background-image: url(https://www.123freevectors.com/wp-content/original/130873-abstract-blue-polygon-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 100vh;
-    background-color: lightgrey;
+  
 }
 
 .container
 {
-    width: 50%;
+    
+    width: 45%;
     height: 50%;
     float: center;
     margin-top: 8%;
+  
+}
+
+.card-content
+{
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
+    background-color: rgb(230, 230, 230);
+    
 }
 
 .card-title

@@ -36,6 +36,7 @@ import { ForgotpasswordModule } from './forgotpassword/forgotpassword.module';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { SetpasswordComponent } from './setpassword/setpassword.component';
 import { SetpasswordModule } from './setpassword/setpassword.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
@@ -57,7 +58,8 @@ import { SetpasswordModule } from './setpassword/setpassword.module';
     ViewComponent,
     ErrorComponent,
     ForgotpasswordComponent,
-    SetpasswordComponent
+    SetpasswordComponent,
+    NotFoundComponent
 
 
     

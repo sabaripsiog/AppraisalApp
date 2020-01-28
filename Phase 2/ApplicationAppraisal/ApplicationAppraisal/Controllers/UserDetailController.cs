@@ -64,8 +64,9 @@ namespace ApplicationAppraisal.Controllers
         {
             try
             {
+                string DecodedID = Hasher.DecodeId(id);
                 string Hashedpassword = Hasher.HashString(password);
-                var entity = db.UserDetails.FirstOrDefault(e => e.EmployeeID == id);
+                var entity = db.UserDetails.FirstOrDefault(e => e.EmployeeID == DecodedID);
 
                 if (entity != null)
                 {

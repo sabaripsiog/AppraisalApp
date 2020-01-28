@@ -17,6 +17,7 @@ namespace AppraisalApplication.Controllers
     {
         private AppraisalDBEntities db = new AppraisalDBEntities();
         
+       
         [HttpGet]
         [Route("api/getEmployee/{id=id}")]
         public IHttpActionResult Get(string id)

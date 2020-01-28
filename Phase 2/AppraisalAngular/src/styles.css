@@ -1,10 +1,10 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-html, body {
+body {
     margin: 0;
     height: 100%;
     overflow: hidden;
-     background-color: lightgrey;
+    
 }
 
 button.btn-submit{

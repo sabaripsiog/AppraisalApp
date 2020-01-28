@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTestProject1
 {
     [TestClass]
-    public class UnitTest1
+    public class LoginUnitTests
     {
         [TestMethod]
         public void ValidateLogin_LoginSuccesfull()

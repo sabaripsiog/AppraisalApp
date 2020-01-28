@@ -68,13 +68,10 @@ isPresent:boolean = true;
       console.log(err);  
     });
     
-
-      
-    
-      
     } else {
       this.validateAllFormFields(this.forgotPasswordForm); //{7}
     }
+    this.dialogRef.close();
   }
   validateAllFormFields(formGroup: FormGroup) {         //{1}
   Object.keys(formGroup.controls).forEach(field => {  //{2}

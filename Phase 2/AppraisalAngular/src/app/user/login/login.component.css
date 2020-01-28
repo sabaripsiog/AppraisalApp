@@ -1,8 +1,41 @@
 .forgot
 {
 position: relative;
-float: right;
+float: left;
 cursor: pointer; 
-color: blue;
-margin-right: 15px;
+color:rgb(32, 6, 6);
+font-weight: 500;
+margin-left: 15px;
+}
+
+.forgot:hover
+{
+ text-decoration: underline;
+}
+
+.hide-icon
+{
+    float: right;
+    cursor: pointer; 
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.red-text
+{
+    background-color: rgb(230, 230, 230);
+}
+
+form
+{
+    background-color: rgb(230, 230, 230);
+}
+
+mat-icon
+{
+    font-weight: bold;
+}
+body
+{
+    margin: 15px;
 }

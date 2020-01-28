@@ -413,11 +413,11 @@ submitAppraisal()
         
       });
       
-    
+      setTimeout(() => {
         this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form set by Manager");
-        setTimeout(() => {
+       
         this.router.navigate(['/home']);
       }, 2000);
       
@@ -492,11 +492,11 @@ console.log("array");
         this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
         
       });
-     
+      setTimeout(() => {
         this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form submitted by Employee");
-        setTimeout(() => {
+       
         this.router.navigate(['/home']);
       }, 2000);
       
@@ -562,11 +562,11 @@ console.log("array");
         this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
         
       });
-     
+      setTimeout(() => {
         this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
        
         localStorage.setItem('loggedInEmployeeAppraisalStatus',"Completed");
-        setTimeout(() => {
+    
         this.router.navigate(['/home']);
       }, 2000);
      
