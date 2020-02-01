@@ -87,7 +87,9 @@ namespace AppraisalApplication.Controllers
                         IsAppraiser = r.IsAppraiser,
                         IsHR = r.IsHR,
                         AppraisalPolicy_ID = r.AppraisalPolicy_ID,
-                        AppraisalStatus = r.AppraisalStatus
+                        AppraisalStatus = r.AppraisalStatus,
+                        GmailID = r.GmailID,
+                        FBmailID = r.FBmailID
                     });
                     return Ok(listOfEmployees.ToList());
                 }
@@ -246,7 +248,10 @@ namespace AppraisalApplication.Controllers
                     entity.AppraisalStatus = employee.AppraisalStatus;
 
                     db.SaveChanges();
-                    MailSender.EmailGeneration(entity.ManagerID, "False", entity.Email, entity.Name);
+                    if (employee.AppraisalStatus == "Form set by Manager")
+                    {
+                        MailSender.EmailGeneration(entity.ManagerID, "False", entity.Email, entity.Name);
+                    }
                     return Ok(entity);
                 }
 
@@ -301,6 +306,54 @@ namespace AppraisalApplication.Controllers
                 };
 
 
+            }
+            catch (Exception ex)
+            {
+                LogFile.WriteLog(ex);
+                return BadRequest();
+            }
+        }
+
+
+        [HttpGet]
+        [Route("api/checkEmployeeSocialMail")]
+        public IHttpActionResult CheckEmployeeSocialMail(string mail)
+        {
+            try
+            {
+                using (AppraisalDBEntities entities = new AppraisalDBEntities())
+                {
+                    var entity = entities.Employees.FirstOrDefault(e => e.GmailID == mail || e.FBmailID == mail);
+
+                    if(entity != null)
+                    {
+                        var selectedEmployee = new
+                        {
+                            ID = entity.ID,
+                            Name = entity.Name,
+                            DOB = entity.DOB,
+
+                            DOJ = entity.DOJ,
+                            Designation = entity.Designation,
+                            Address = entity.Address,
+                            BloodType = entity.BloodType,
+                            Email = entity.Email,
+                            Gender = entity.Gender,
+                            ManagerID = entity.ManagerID,
+                            IsAppraiser = entity.IsAppraiser,
+                            IsHR = entity.IsHR,
+                            AppraisalPolicy_ID = entity.AppraisalPolicy_ID,
+                            AppraisalStatus = entity.AppraisalStatus,
+                            GmailID = entity.GmailID,
+                            FBmailID = entity.FBmailID
+                        };
+                        return Ok(selectedEmployee);
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
             }
             catch (Exception ex)
             {

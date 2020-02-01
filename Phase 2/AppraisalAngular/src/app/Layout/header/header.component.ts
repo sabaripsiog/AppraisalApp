@@ -60,6 +60,12 @@ employeeName : any;
     localStorage.removeItem('loggedInEmployeeAppraisalStatus');
     localStorage.removeItem('appraiserToggle');
     localStorage.removeItem('ManagerToggle');
+    localStorage.removeItem('EmployeeID');
+    localStorage.removeItem('EmployeeName');
+    localStorage.removeItem('EmployeeDesignation');
+    localStorage.removeItem('EmployeeDOB');
+    localStorage.removeItem('EmployeeDOJ');
+    localStorage.removeItem('EmployeeAppraisalStatus');
     this.router.navigate(['/login']);
   }
  

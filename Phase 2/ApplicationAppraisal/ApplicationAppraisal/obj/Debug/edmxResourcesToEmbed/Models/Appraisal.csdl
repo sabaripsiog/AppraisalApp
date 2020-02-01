@@ -57,6 +57,8 @@
     <NavigationProperty Name="Appraisals" Relationship="Self.Appraisal_Employee" FromRole="Employee" ToRole="Appraisal" />
     <NavigationProperty Name="AppraisalPolicy" Relationship="Self.Employee_AppraisalPolicy" FromRole="Employee" ToRole="AppraisalPolicy" />
     <NavigationProperty Name="UserDetails" Relationship="Self.UserDetails_Employee" FromRole="Employee" ToRole="UserDetails" />
+    <Property Name="GmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FBmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="GoalCategory">
     <Key>

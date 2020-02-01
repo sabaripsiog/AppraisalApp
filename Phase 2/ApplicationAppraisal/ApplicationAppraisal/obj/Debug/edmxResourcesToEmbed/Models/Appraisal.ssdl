@@ -49,6 +49,8 @@
     <Property Name="IsHR" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="AppraisalPolicy_ID" Type="int" Nullable="false" />
     <Property Name="AppraisalStatus" Type="varchar" MaxLength="50" />
+    <Property Name="GmailID" Type="varchar" MaxLength="100" />
+    <Property Name="FBmailID" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="GoalCategory">
     <Key>

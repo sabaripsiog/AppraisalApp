@@ -183,6 +183,18 @@
 <button [disabled]="(category.categoryID === 3)" (click)="saveAndNext()" id="save-option-next" mat-flat-button color="primary"><mat-icon>arrow_forward</mat-icon></button>
 <button *ngIf="(appraisalStatus === 'Initiated by HR');" [disabled]="!(category.categoryID === 3)" id="submit" (click)="submitAppraisal()" mat-flat-button color="primary">Submit</button>
 <button *ngIf="(appraisalStatus === 'Form submitted by Employee');" [disabled]="!(category.categoryID === 3)" id="submit" (click)="submitFinalAppraisal()" mat-flat-button color="primary">Submit</button>
+
+<div *ngIf="showPreloader" class="preloader-wrapper small active">
+  <div class="spinner-layer spinner-blue-only">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+</div>
 <button *ngIf="(appraisalStatus === 'Form set by Manager') || (appraisalStatus === 'Completed');" id="submit" (click)="goBack()" mat-flat-button color="primary">Go Back</button>
 </div>
 </div>
@@ -290,6 +302,17 @@
   <button [disabled]="(category.categoryID === 3)" (click)="saveComments()" id="save-option-next" mat-flat-button color="primary"><mat-icon>arrow_forward</mat-icon></button>
   
   <button *ngIf="(appraisalStatus === 'Form set by Manager')"  [disabled]="!(category.categoryID === 3)" id="submit" mat-flat-button color="primary" (click)="submitByEmployee()">Submit</button>
+  <div *ngIf="showPreloader" class="preloader-wrapper small active">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
   <button *ngIf="(appraisalStatus === 'Form submitted by Employee') || (appraisalStatus === 'Completed')" id="save-option" (click)="goBack()" mat-flat-button color="primary">Go Back</button>
   
 </div>

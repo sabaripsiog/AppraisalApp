@@ -29,23 +29,24 @@ export interface Ratings {
 
 
 const DATAARRAY1 = [
-  {goal: "Maintains standards consistently.", disable : false},
-   {goal: "Produces expected volume of work in a timely manner.", disable : false},
-   {goal : "Sets appropriate objectives to meet commitments within budget.", disable : false},
-   {goal : "Demonstrates willingness to assume additional responsibility.", disable : false},
+  {goal: "Write engineered code (Implement Best practices, SOLID principles wherever applicable)", disable : false},
+   {goal: "Schedule adherence (Meet internal and external target release dates)", disable : false},
+   {goal : "Quality adherence (Code review , Unit testing, Number of SIT/UAT defects reported)", disable : false},
+   {goal : " Process adherence (Code checkins, Build process, Documentation etc)", disable : false},
    {goal : "Establishes priorities. Anticipates and prepares for changing workload or working conditions.", disable : false},
-   {goal: "Maintains acceptable record of attendance", disable : false}
+   {goal: "Estimation and Planning - Plan and estimate the tasks assigned", disable : false}
 ];
 
 const DATAARRAY2 = [
-  {goal: "Maintains composure in highly stressful or adverse situations.", disable : false},
-   {goal: "Increase in conversion rate and production rate", disable : false},
-   {goal : "Sets appropriate objectives to meet commitments within budget. Establishes priorities and organizes workflow to meet objectives.", disable : false},
+  {goal: "Communication - Proactive and timely communication with team,  management, and/or with customer", disable : false},
+   {goal: "Learning - Acquire knowledge in Known as well as new Technology areas", disable : false},
+   {goal : "Team Collaboration - Step in and Step up as needed for other team members outside of allocated project responsibilities", disable : false},
+   {goal : "Flexibility / Attitude - Going beyond work expectations as and when needed", disable : false},
+   {goal : "Focus / Work under pressure -  Handle work activities consitently even under demanding timelines and unanticipated challenges", disable : false},
    
 ];
 
 const DATAARRAY3 = [
-  {goal: "Knows what FIT information or materials are sensitive and why.", disable : false},
    {goal: "Manages, leads, and enables the process of change and transition while helping others deal with the impacts.", disable : false},
    {goal : "Sets appropriate objectives to meet commitments within budget. Establishes priorities and organizes workflow to meet objectives.", disable : false},
    {goal : "Focuses on results and desired outcomes and how best to achieve them in order to get the job done", disable : false},
@@ -82,6 +83,7 @@ export class GoallistComponent{
   dataArray = DATAARRAY1;
   employee:object;
   appraisalID : number;
+  showPreloader : boolean = false;
 source : any;
 displayedColumns: string[] = ['id', 'name', 'priority','action'];
 ViewDisplayedColumns: string[] = ['id', 'name', 'priority'];
@@ -371,6 +373,7 @@ this.table.last.renderRows();
 
 submitAppraisal()
 {
+ 
   this.employee={
     AppraisalStatus : "Form set by Manager"
   }
@@ -384,6 +387,7 @@ submitAppraisal()
 
   if(isValid)
   {
+    this.showPreloader = true;
   this.endArray = this.performanceGoalData.concat(this.competencyGoalData,this.leadershipGoalData);
   this.employeeID = localStorage.getItem('EmployeeID');
   this.LoggedEmployee = localStorage.getItem('loggedInEmployeeID');
@@ -409,9 +413,10 @@ submitAppraisal()
        
         this.dataService.postEmployeeAppraisalGoals(this.appraisalGoals).subscribe();
        
-        this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
+      
         
       });
+      this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
       
       setTimeout(() => {
         this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
@@ -449,6 +454,7 @@ goBack()
 
 submitByEmployee()
 {
+  
   this.employee={
     AppraisalStatus : "Form submitted by Employee"
   }
@@ -466,6 +472,7 @@ submitByEmployee()
   }
   if(allowSubmit)
   {
+    this.showPreloader = true;
   this.employeeID = localStorage.getItem('EmployeeID');
   this.LoggedEmployee = localStorage.getItem('loggedInEmployeeID');
   console.log('sab2');
@@ -489,9 +496,10 @@ console.log("array");
         );
         this.dataService.updateEmployeeAppraisalGoals(this.appraisalGoals, element.tableID).subscribe();
         
-        this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
+       
         
       });
+      this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
       setTimeout(() => {
         this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
         this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
@@ -519,12 +527,14 @@ else
 
 submitFinalAppraisal()
 {
+  
   this.employee={
     AppraisalStatus : "Completed"
   }
   console.log('sab');
   this.endArray = this.performanceGoalData.concat(this.competencyGoalData,this.leadershipGoalData);
   console.log(this.endArray);
+  this.computeScore(this.endArray);
   let allowSubmit = true;
   for(let i=0;i<this.endArray.length;i++)
   {
@@ -536,6 +546,7 @@ submitFinalAppraisal()
   }
   if(allowSubmit)
   {
+    this.showPreloader = true;
   this.employeeID = localStorage.getItem('EmployeeID');
   this.LoggedEmployee = localStorage.getItem('loggedInEmployeeID');
   console.log('sab2');
@@ -559,9 +570,10 @@ console.log("array");
         );
         this.dataService.updateEmployeeAppraisalGoals(this.appraisalGoals, element.tableID).subscribe();
         
-        this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
+    
         
       });
+      this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
       setTimeout(() => {
         this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
        
@@ -587,6 +599,38 @@ else
 }
 }
 
+computeScore(array : Goals[])
+{
+  let score = 0.0;
+  let maxScore = 0.0;
+  let finalScore = 0.0;
+array.forEach(element => {
+  if(element.managerRating == 'A+')
+  {
+    score = score + (element.priority*5)
+  }
+  else if(element.managerRating == 'A')
+  {
+    score = score + (element.priority*4)
+  }
+  else if(element.managerRating == 'A+')
+  {
+    score = score + (element.priority*3)
+  }
+  else if(element.managerRating == 'A+')
+  {
+    score = score + (element.priority*2)
+  }
+  else if(element.managerRating == 'A+')
+  {
+    score = score + (element.priority*1)
+  }
+  maxScore = maxScore + (element.priority*5);
+});
+finalScore = (score/maxScore)*5;
+localStorage.setItem("finalscore", finalScore.toString());
+console.log("FinalScore = "+ finalScore );
+}
 }
 
 

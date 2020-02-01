@@ -34,6 +34,8 @@ namespace ApplicationAppraisal.Models
         public string IsHR { get; set; }
         public int AppraisalPolicy_ID { get; set; }
         public string AppraisalStatus { get; set; }
+        public string GmailID { get; set; }
+        public string FBmailID { get; set; }
     
         public virtual ICollection<Appraisal> Appraisals { get; set; }
         public virtual AppraisalPolicy AppraisalPolicy { get; set; }

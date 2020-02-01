@@ -122,4 +122,8 @@ export class DataService {
 
     return this.http.put(this.baseUrl + 'api/UpdatePassword/'+ id + '?password=' + password,httpOptions);
   }
+  public checkEmployeeSocialMail(mail : string): Observable<any>
+  {
+    return this.http.get( this.baseUrl + 'api/checkEmployeeSocialMail?mail='+mail);
+  }
 }

@@ -37,11 +37,23 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { SetpasswordComponent } from './setpassword/setpassword.component';
 import { SetpasswordModule } from './setpassword/setpassword.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider} from 'ng4-social-login';
 
+const config = new AuthServiceConfig([
+{
+  id : GoogleLoginProvider.PROVIDER_ID,
+  provider : new GoogleLoginProvider('25463844187-o4j10q8ad6pt79edk7jgp9h69ii3vqbt.apps.googleusercontent.com')
+},
+{
+  id : FacebookLoginProvider.PROVIDER_ID,
+  provider : new FacebookLoginProvider('616206889210154'),
+}
+], false);
 
-
-
-
+export function provideConfig()
+{
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -96,10 +108,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatTooltipModule,
     ForgotpasswordModule,
     FieldErrorDisplayModule,
-    SetpasswordModule
+    SetpasswordModule,
+    SocialLoginModule
 
   ],
   providers: [AuthGuard,
+    { provide : AuthServiceConfig, useFactory: provideConfig}
     ],
     
   bootstrap: [AppComponent],

@@ -39,3 +39,26 @@ body
 {
     margin: 15px;
 }
+
+.socialpng
+{
+    height : 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+.fb {
+    background-color: #3B5998;
+    color: white;
+    margin-top: 20px;
+    margin-right: 20px;
+  }
+  
+ 
+  
+  .google {
+    background-color: #dd4b39;
+    color: white;
+    margin-top: 20px;
+    margin-left: 8px;
+  }

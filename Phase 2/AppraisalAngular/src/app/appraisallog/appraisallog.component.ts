@@ -30,6 +30,7 @@ export class AppraisallogComponent implements OnInit{
   appraisalStatus: any;
   id : any;
   ngOnInit() {
+   
     this.isAppraiser = localStorage.getItem('loggedInEmployeeIsAppraiser');
     this.isHR = localStorage.getItem('loggedInEmployeeIsHR');
 this.appraisalStatus = localStorage.getItem('loggedInEmployeeAppraisalStatus');
@@ -67,7 +68,7 @@ this.http.get<Employee[]>('https://localhost:44373/api/GetMyEmployees?'+'id='+ t
       setTimeout(() => {
         this.show = true;
     }, 100);
-      
+    console.log("FinalScore = "+ localStorage.getItem('finalscore')); 
   }
 
   applyFilter(filterValue: string) {

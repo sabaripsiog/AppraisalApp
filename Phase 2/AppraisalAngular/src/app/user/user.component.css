@@ -13,7 +13,7 @@ body
     width: 45%;
     height: 50%;
     float: center;
-    margin-top: 8%;
+    margin-top: 7%;
   
 }
 
@@ -21,7 +21,7 @@ body
 {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 12), 0 5px 5px 0 rgba(100, 51, 74, 5);
     background-color: rgb(230, 230, 230);
-    
+    height: 450px;
 }
 
 .card-title

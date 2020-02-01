@@ -237,3 +237,9 @@ mat-icon
     color: white;
     width: 20px; 
 }
+
+.preloader-wrapper
+{
+    left:30em;
+    height: 40px;
+}

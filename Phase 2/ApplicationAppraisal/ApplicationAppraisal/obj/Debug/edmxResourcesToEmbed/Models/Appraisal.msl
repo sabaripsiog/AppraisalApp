@@ -38,6 +38,8 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="AppraisalModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="FBmailID" ColumnName="FBmailID" />
+          <ScalarProperty Name="GmailID" ColumnName="GmailID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DOB" ColumnName="DOB" />

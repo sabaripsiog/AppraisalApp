@@ -54,6 +54,8 @@
           <Property Name="IsHR" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="AppraisalPolicy_ID" Type="int" Nullable="false" />
           <Property Name="AppraisalStatus" Type="varchar" MaxLength="50" />
+          <Property Name="GmailID" Type="varchar" MaxLength="100" />
+          <Property Name="FBmailID" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="GoalCategory">
           <Key>
@@ -220,6 +222,8 @@
           <NavigationProperty Name="Appraisals" Relationship="Self.Appraisal_Employee" FromRole="Employee" ToRole="Appraisal" />
           <NavigationProperty Name="AppraisalPolicy" Relationship="Self.Employee_AppraisalPolicy" FromRole="Employee" ToRole="AppraisalPolicy" />
           <NavigationProperty Name="UserDetails" Relationship="Self.UserDetails_Employee" FromRole="Employee" ToRole="UserDetails" />
+          <Property Name="GmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FBmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="GoalCategory">
           <Key>
@@ -370,6 +374,8 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="AppraisalModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="FBmailID" ColumnName="FBmailID" />
+                <ScalarProperty Name="GmailID" ColumnName="GmailID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
