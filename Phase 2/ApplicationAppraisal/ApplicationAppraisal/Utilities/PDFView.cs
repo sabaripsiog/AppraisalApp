@@ -20,7 +20,7 @@ namespace ApplicationAppraisal.Utilities
            
         // Create an instance to the PDF file by creating an instance of the PDF   
         // Writer class using the document and the filestrem in the constructor.  
-        public static void getPDFView(List<ProductGoals> list,string role, string name, string designation, DateTime date)
+        public static void getPDFView(List<ProductGoals> list,string role, string name, string designation, DateTime date, float score)
         {
 
             if (role == "True")
@@ -140,6 +140,32 @@ namespace ApplicationAppraisal.Utilities
                 document.Add(new Paragraph("Leadership goals"));
                 document.Add(new Paragraph("\n"));
                 document.Add(LeaderTable);
+                document.Add(new Paragraph("\n"));
+                document.Add(new Paragraph("\n"));
+
+                if(score>0)
+                {
+                    if(score > 0 && score < 1)
+                    {
+                        document.Add(new Paragraph("Final Grading = C"));
+                    }
+                    else if (score > 1 && score < 2)
+                    {
+                        document.Add(new Paragraph("Final Grading = B"));
+                    }
+                    else if (score > 2 && score < 3)
+                    {
+                        document.Add(new Paragraph("Final Grading = B+"));
+                    }
+                    else if (score > 3 && score < 4)
+                    {
+                        document.Add(new Paragraph("Final Grading = B"));
+                    }
+                    else if (score > 4 && score < 5)
+                    {
+                        document.Add(new Paragraph("Final Grading = A"));
+                    }
+                }
                 // Close the document  
                 document.Close();
                 // Close the writer instance  

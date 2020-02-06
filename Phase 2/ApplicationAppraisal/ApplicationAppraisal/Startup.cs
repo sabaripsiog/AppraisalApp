@@ -21,7 +21,7 @@ namespace ApplicationAppraisal
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(30),
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
                 Provider = myProvider
             };
             app.UseOAuthAuthorizationServer(options);

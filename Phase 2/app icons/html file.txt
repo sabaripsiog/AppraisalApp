@@ -1,0 +1,78 @@
+<div id="totalpage">
+<app-header></app-header>
+<div *ngFor="let category of categories; let i = index">
+<div *ngIf="category.categoryID == pageNumber">
+<div>
+  <div id="topic">
+  <strong><b>{{category.category}} Goals</b></strong>
+</div>
+<div class="action-space">
+<div class="container text-center">
+    <table mat-table [dataSource]="dataSource" #mytable class="my-table mat-elevation-z8">
+  
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Goal </th>
+        <td mat-cell *matCellDef="let element"> {{element.goal}} </td>
+      </ng-container>
+  
+      <!-- Action Column -->
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef> Priority </th>
+        <td mat-cell *matCellDef="let element"> {{element.priority}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" class="action-link"> 
+          <a style="cursor:pointer" (click)="openDialog('Update',element)">Edit</a> | 
+          <a style="cursor:pointer" (click)="openDialog('Delete',element)">Delete</a>  
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+  </div>
+  
+</div>
+<button id="add-option" mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Add Goal</button>
+<button *ngIf="(category.categoryID === 2 || category.categoryID === 3);" (click)="goPreviousPage()" id="save-option" mat-flat-button color="primary">Previous</button>
+<button *ngIf="(category.categoryID === 1 || category.categoryID === 2);" (click)="saveAndNext()" id="save-option" mat-flat-button color="primary">Save and Next</button>
+<button *ngIf="(category.categoryID === 3);" id="save-option" mat-flat-button color="primary">Submit</button>
+</div>
+<div id="selected-employee-details">
+  <h6>selected-employee-details</h6>
+</div>
+
+<div id="suggestion-list">
+  <h6>suggestion-list</h6>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div>
+  <h5>APPRAISAL</h5>
+  <div id="employee-view">
+<div id="employee-content">
+
+</div>
+  </div>
+</div>

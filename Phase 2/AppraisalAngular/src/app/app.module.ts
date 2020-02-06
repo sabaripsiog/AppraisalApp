@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Layout/header/header.component';
 import { FooterComponent } from './Layout/footer/footer.component';
 import { DisplaycardComponent } from './Layout/displaycard/displaycard.component';
-import { LayoutModule } from './Layout/layout.module';
+
 import { CommonModule } from '@angular/common';
 import { NgbPaginationModule, NgbAlertModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -39,6 +39,7 @@ import { SetpasswordModule } from './setpassword/setpassword.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider} from 'ng4-social-login';
 
+
 const config = new AuthServiceConfig([
 {
   id : GoogleLoginProvider.PROVIDER_ID,
@@ -58,11 +59,13 @@ export function provideConfig()
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
+  HeaderComponent,
+  GoallistComponent,
+  AppraisallogComponent,
     DisplaycardComponent,
-    AppraisallogComponent,
-    GoallistComponent,
+   FooterComponent,
+   
+   
     DialogBoxComponent,
     UserComponent,
     LoginComponent,
@@ -109,7 +112,8 @@ export function provideConfig()
     ForgotpasswordModule,
     FieldErrorDisplayModule,
     SetpasswordModule,
-    SocialLoginModule
+    SocialLoginModule,
+
 
   ],
   providers: [AuthGuard,
@@ -123,5 +127,6 @@ export function provideConfig()
    ErrorComponent,
    ForgotpasswordComponent
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

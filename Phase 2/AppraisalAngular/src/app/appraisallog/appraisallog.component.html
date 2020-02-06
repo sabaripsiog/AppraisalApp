@@ -45,15 +45,15 @@
     <ng-container matColumnDef="AppraisalStatus">
       <th mat-header-cell  *matHeaderCellDef > Appraisal Status </th>
       <td mat-cell *matCellDef="let element" >
-         <div *ngIf="(element.AppraisalStatus === 'Yet to initiate'); else regular">
+         <div *ngIf="(element.AppraisalStatus === 'Yet to initiate');">
            <button mat-button ngDefaultControl class="initiateButton" (click)="InitiateProcess(element)">Initiate</button>
           </div>
           <div *ngIf="(element.AppraisalStatus === 'Completed')">
-          <a id="click-here" (click)="openViewDialog(element)"><u>(Form)</u></a>
+            <button mat-button ngDefaultControl class="initiateButton" (click)="openViewDialog(element)">View form</button>
            </div>
-          <ng-template #regular>
+          <div *ngIf="(element.AppraisalStatus !== 'Yet to initiate') && (element.AppraisalStatus !== 'Completed');">
             {{element.AppraisalStatus}}
-          </ng-template>
+          </div>
       </td>
     </ng-container>
 
@@ -129,13 +129,16 @@
     <div id="employee-view">
     
 <div [hidden]="!(appraisalStatus === 'Form set by Manager')" id="employee-content">
-  Your appraisal process has been initiated. <a id="click-here" (click)="takeEmployeetoForm()"><u>Click here</u></a> to fill the form
+  Your appraisal process has been initiated. <a style="cursor: pointer; color: blue;" (click)="takeEmployeetoForm()"><u>Click here</u></a> to fill the form
 </div>
 <div [hidden]="!(appraisalStatus === 'Initiated by HR')" id="employee-content">
   You don't have any appraisal right now.
 </div>
-<div [hidden]="!((appraisalStatus === 'Form submitted by Employee') || (appraisalStatus === 'Completed'))" id="employee-content">
-  You have submitted your appraisal form. <a id="click-here" (click)="openViewDialogEmployee()"><u>Click here</u></a> to view the form
+<div [hidden]="!(appraisalStatus === 'Yet to initiate')" id="employee-content">
+  You don't have any appraisal right now.
+</div>
+<div *ngIf="((appraisalStatus === 'Form submitted by Employee') || (appraisalStatus === 'Completed'))" id="employee-content">
+  You have submitted your appraisal form. <a style="cursor: pointer; color: blue;" (click)="openViewDialogEmployee()"><u>Click here</u></a> to view the form
 </div>
   </div>
 </div>

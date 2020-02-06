@@ -86,7 +86,7 @@ th
 {
     cursor: pointer;
     color: blue;
-    
+    float: left;
 }
 
 button

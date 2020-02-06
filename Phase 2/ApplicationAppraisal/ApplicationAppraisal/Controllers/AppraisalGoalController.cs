@@ -117,7 +117,7 @@ namespace ApplicationAppraisal.Controllers
 
         [HttpGet]
         [Route("api/viewPDF/{id=id}")]
-        public IHttpActionResult GetPDF(int id, string role, string name, string designation, DateTime doj)
+        public IHttpActionResult GetPDF(int id, string role, string name, string designation, DateTime doj, float score)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace ApplicationAppraisal.Controllers
                                   Priority = r.Priority,
                               }).ToList();
 
-                PDFView.getPDFView(entity, role, name, designation,doj);
+                PDFView.getPDFView(entity, role, name, designation,doj, score);
 
                 if (entity != null)
                 {

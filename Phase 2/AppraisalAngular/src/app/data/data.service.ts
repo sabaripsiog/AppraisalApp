@@ -14,7 +14,7 @@ export class UserName {
   providedIn: 'root'
 })
 export class DataService {
-  baseUrl = environment.baseUrl;
+  baseUrl = 'https://localhost:44373/';
   isHR : boolean;
   isAppraiser : boolean;
   url : string;
@@ -96,14 +96,14 @@ export class DataService {
     return this.http.get( this.baseUrl + 'api/getAllGoals/'+ id);
   }
 
-  public postPDF(id : number,role : string): Observable<any>
+  public postPDF(id : number,role : string,score: number): Observable<any>
   {
     let name = localStorage.getItem('EmployeeName');
     let designation = localStorage.getItem('EmployeeDesignation');
     let doj = localStorage.getItem('EmployeeDOJ');
     console.log(name);
     console.log(designation);
-    return this.http.get( this.baseUrl + 'api/viewPDF/'+ id +'?role='+role+'&&name='+name+'&&designation='+designation+'&&doj='+doj);
+    return this.http.get( this.baseUrl + 'api/viewPDF/'+ id +'?role='+role+'&&name='+name+'&&designation='+designation+'&&doj='+doj+'&&score='+score);
   }
 
 

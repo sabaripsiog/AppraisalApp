@@ -419,8 +419,8 @@ submitAppraisal()
       this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
       
       setTimeout(() => {
-        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
-        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser'),0).subscribe();
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser'),0).subscribe();
         localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form set by Manager");
        
         this.router.navigate(['/home']);
@@ -501,8 +501,8 @@ console.log("array");
       });
       this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
       setTimeout(() => {
-        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
-        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser'),0).subscribe();
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser'),0).subscribe();
         localStorage.setItem('loggedInEmployeeAppraisalStatus',"Form submitted by Employee");
        
         this.router.navigate(['/home']);
@@ -534,7 +534,7 @@ submitFinalAppraisal()
   console.log('sab');
   this.endArray = this.performanceGoalData.concat(this.competencyGoalData,this.leadershipGoalData);
   console.log(this.endArray);
-  this.computeScore(this.endArray);
+  let finalScore = this.computeScore(this.endArray);
   let allowSubmit = true;
   for(let i=0;i<this.endArray.length;i++)
   {
@@ -575,7 +575,7 @@ console.log("array");
       });
       this.dataService.updateEmployeeStatus(this.employee,this.employeeID).subscribe();
       setTimeout(() => {
-        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser')).subscribe();
+        this.dataService.postPDF(data.ID, localStorage.getItem('loggedInEmployeeIsAppraiser'),finalScore).subscribe();
        
         localStorage.setItem('loggedInEmployeeAppraisalStatus',"Completed");
     
@@ -613,15 +613,15 @@ array.forEach(element => {
   {
     score = score + (element.priority*4)
   }
-  else if(element.managerRating == 'A+')
+  else if(element.managerRating == 'B+')
   {
     score = score + (element.priority*3)
   }
-  else if(element.managerRating == 'A+')
+  else if(element.managerRating == 'B')
   {
     score = score + (element.priority*2)
   }
-  else if(element.managerRating == 'A+')
+  else if(element.managerRating == 'C')
   {
     score = score + (element.priority*1)
   }
@@ -629,7 +629,8 @@ array.forEach(element => {
 });
 finalScore = (score/maxScore)*5;
 localStorage.setItem("finalscore", finalScore.toString());
-console.log("FinalScore = "+ finalScore );
+console.log("FinalScore = "+ finalScore);
+return finalScore;
 }
 }
 
